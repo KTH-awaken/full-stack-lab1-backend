@@ -1,11 +1,13 @@
 package com.example.springbootdocker.controllers;
 
-import com.example.springbootdocker.entitys.Patient;
-import com.example.springbootdocker.service.impl.PatientService;
+//import com.example.springbootdocker.entitys.Patient;
+import com.example.springbootdocker.View.impl.PatientService;
+import com.example.springbootdocker.View.impl.PatientVm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,29 +21,32 @@ public class PatientController {
     }
 
     @GetMapping("/patient")
-    public Patient getUser(@RequestParam Integer id){
+    public PatientVm getPatient(@RequestParam Integer id){
         Optional patient = patientService.getPatient(id);
         System.out.println("patient in controller = " + patient);
         if (patient.isPresent()){
-            return (Patient) patient.get();
+            return (PatientVm) patient.get();
         }
         //todo returna en vm istllät och thow exception
        throw new RuntimeException("No patient with the id "+id);
     }
-//    @PostMapping("/patient")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Patient createPatient(@RequestBody Integer id){
-//        //todo remove hårdkodning
-//        Patient harCodedPatient = new Patient("milad",33);
-//        return patientService.createPatient(harCodedPatient);
-//    }
+
+    @GetMapping("/patients")
+    public List<PatientVm> getPatients(){
+        List<PatientVm> allPatients = patientService.getAllPatients();
+        if (!allPatients.isEmpty()){
+            return allPatients;
+        }
+        throw new RuntimeException("No patients in db");
+    }
+
 
     @PostMapping("/patient")
     @ResponseStatus(HttpStatus.CREATED)
-    public Patient createPatient(@RequestBody Patient patient){
+    public PatientVm createPatient(@RequestBody PatientVm patient){
         //todo remove hårdkodning
         System.out.println("patient in controller = " + patient);
-//        Patient harCodedPatient = new Patient(3,"milad",33);
+        System.out.println("patient.getId() = " + patient.getId());
         return patientService.createPatient(patient);
     }
 

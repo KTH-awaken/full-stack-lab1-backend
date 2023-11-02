@@ -1,29 +1,23 @@
-package com.example.springbootdocker.entitys;
+package com.example.springbootdocker.View.impl;
 
-import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.persistence.Id;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "patient")
-public class Patient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
+public class PatientVm {
     private int id;
     private String name;
     private int age;
     private String mCondition;
 
-    public Patient( String name, int age,String mCondition) {
-        this.id = generateIntGUID();
+    public PatientVm( int id, String name, int age,String mCondition) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.mCondition = mCondition;
     }
 
-    public Patient() {
+    public PatientVm() {
 
     }
 
@@ -31,7 +25,6 @@ public class Patient {
         this.id = id;
     }
 
-    @Id
     public int getId() {
         return id;
     }
@@ -61,13 +54,7 @@ public class Patient {
         this.age = age;
     }
 
-    private int generateIntGUID(){
-        UUID uuid = UUID.randomUUID();
-        long mostSignificantBits = uuid.getMostSignificantBits();
-        int generatedInt = (int) mostSignificantBits;
-        System.out.println("generatedInt = " + generatedInt);
-        return generatedInt;
-    }
+
 
     @Override
     public String toString() {
