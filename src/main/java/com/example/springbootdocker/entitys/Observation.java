@@ -1,4 +1,4 @@
-package com.example.springbootdocker.entity;
+package com.example.springbootdocker.entitys;
 
 import jakarta.persistence.*;
 
