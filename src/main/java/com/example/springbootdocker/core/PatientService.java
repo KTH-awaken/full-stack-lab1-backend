@@ -1,7 +1,12 @@
 package com.example.springbootdocker.View.impl;
 
+import com.example.springbootdocker.View.ViewModels.MessageVm;
+import com.example.springbootdocker.View.ViewModels.PatientVm;
+import com.example.springbootdocker.entitys.Account;
+import com.example.springbootdocker.entitys.Message;
 import com.example.springbootdocker.entitys.Patient;
-import com.example.springbootdocker.repos.impl.IPatientRepo;
+import com.example.springbootdocker.repos.IMessageRepo;
+import com.example.springbootdocker.repos.IPatientRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,10 +18,12 @@ public class PatientService {
 
 //    private List<Patient> patientList;
     private IPatientRepo patientRepo;
+    private IMessageRepo messageRepo;
 
-    public PatientService(IPatientRepo patientRepo) {
+    public PatientService(IPatientRepo patientRepo,IMessageRepo messageRepo) {
 //        this.patientList = new ArrayList<>();
         this.patientRepo = patientRepo;
+        this.messageRepo = messageRepo;
 
 //        Patient patient1 = new Patient("marcus",23,"Best");
 //        Patient patient2 = new Patient("hamada",23,"Good");
@@ -69,17 +76,7 @@ public class PatientService {
 
         return patientVmList;
     }
-//    public Optional<Patient> getPatient(Integer id){//todo remove test
-//        Optional optional = Optional.empty();
-//        System.out.println("in get patient");
-//        System.out.println("id = " + id);
-//        for (Patient p :patientList) {
-//            if (p.getId()==id){
-//                optional=Optional.of(p);
-//                System.out.println("p = " + p);
-//                return optional;
-//            }
-//        }
-//        return optional;
-//    }
+
+
+
 }
