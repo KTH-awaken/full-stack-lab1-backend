@@ -19,18 +19,18 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "sender")
-    private Account sender;
+    private int senderId;
 
     @ManyToOne
     @JoinColumn(name = "receiver")
-    private Account receiver;
+    private int receiverId;
 
-    public Message(String text, Account sender, Account receiver) {
+    public Message(String text, int senderId, int receiverId) {
 //        this.id = generateIntGUID();
         this.text = text;
         this.date = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        this.sender = sender;
-        this.receiver = receiver;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
     }
 
     public Message() {
@@ -61,20 +61,20 @@ public class Message {
         this.date = date;
     }
 
-    public Account getSender() {
-        return sender;
+    public int getSender() {
+        return senderId;
     }
 
-    public void setSender(Account sender) {
-        this.sender = sender;
+    public void setSender(int senderId) {
+        this.senderId = senderId;
     }
 
-    public Account getReceiver() {
-        return receiver;
+    public int getReceiver() {
+        return receiverId;
     }
 
-    public void setReceiver(Account receiver) {
-        this.receiver = receiver;
+    public void setReceiver(int receiverId) {
+        this.receiverId = receiverId;
     }
 
     //    private int generateIntGUID(){

@@ -25,7 +25,7 @@ public class AccountService {
     public AccountVm getAccount(Integer id){
         java.util.Optional<Account> account = accountRepo.findById(id);
         if (account.isPresent()){
-            AccountVm accountVm = new AccountVm(account.get().getEmail(),account.get().getReceivedMessages(), account.get().getSentMessages());
+            AccountVm accountVm = new AccountVm(account.get().getId(),account.get().getEmail(),account.get().getReceivedMessages(), account.get().getSentMessages());
             return accountVm;
         }
         throw new RuntimeException("couldn't find account with id: "+id);
@@ -36,14 +36,13 @@ public class AccountService {
         List<AccountVm> accountVmList = new ArrayList<>();
 
         for (Account account : allAccounts) {
-            AccountVm accountVm =  new AccountVm(account.getEmail(),account.getReceivedMessages(), account.getSentMessages());
+            AccountVm accountVm =  new AccountVm(account.getId(),account.getEmail(),account.getReceivedMessages(), account.getSentMessages());
             accountVmList.add(accountVm);
         }
         return accountVmList;
     }
 
     public MessageVm sendMessage(MessageVm messageVm){
-
         Message message = new Message(messageVm.getText(),convertFromAccountVmToAccount(messageVm.getSender()),convertFromAccountVmToAccount(messageVm.getSender()));
         messageRepo.save(message);
         return messageVm;
@@ -59,7 +58,7 @@ public class AccountService {
         return new Account(accountVm.getEmail(),accountVm.getReceivedMessages(),accountVm.getSentMessages());
     }
     private AccountVm convertFromAccountToAccountVm(Account account){
-        return new AccountVm(account.getEmail(),account.getReceivedMessages(),account.getSentMessages());
+        return new AccountVm(account.getId(),account.getEmail(),account.getReceivedMessages(),account.getSentMessages());
     }
     public MessageVm getMessage(int id){
         Optional<Message> message = messageRepo.findById(id);

@@ -13,10 +13,10 @@ public class Account {
     int id;
     private String email;
 
-    @OneToMany(mappedBy = "receiver")
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private List<Message> receivedMessages;
 
-    @OneToMany(mappedBy = "sender")
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<Message> sentMessages;
 
     public Account(String email, List<Message> receivedMessages, List<Message> sentMessages) {
@@ -27,6 +27,10 @@ public class Account {
 
     public Account() {
 
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getEmail() {

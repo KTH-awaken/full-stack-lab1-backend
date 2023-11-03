@@ -6,14 +6,20 @@ import jakarta.persistence.*;
 import java.util.List;
 
 public class AccountVm {
+    int id;
     private String email;
     private List<Message> receivedMessages;
     private List<Message> sentMessages;
 
-    public AccountVm(String email, List<Message> receivedMessages, List<Message> sentMessages) {
+    public AccountVm(int id,String email, List<Message> receivedMessages, List<Message> sentMessages) {
+        this.id = id;
         this.email = email;
         this.receivedMessages = receivedMessages;
         this.sentMessages = sentMessages;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getEmail() {

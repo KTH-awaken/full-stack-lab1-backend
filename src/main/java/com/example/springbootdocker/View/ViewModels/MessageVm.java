@@ -12,8 +12,6 @@ public class MessageVm {
     private Date date;
 
     private AccountVm sender;
-
-
     private AccountVm receiver;
 
     public MessageVm(int id,String text, Date date, AccountVm sender, AccountVm receiver) {
