@@ -37,33 +37,29 @@ public class AccountController {
     @PostMapping("/account")
     @ResponseStatus(HttpStatus.CREATED)
     public AccountVm createAccount(@RequestBody AccountVm accountVm){
-
-//        AccountVm hardcodeVm = new AccountVm("hardocoded@gmai.com",new ArrayList<>(),new ArrayList<>());
-        System.out.println("hardcodeVm = " + accountVm);
-//        return accountService.createAccount(hardcodeVm);
-
         return accountService.createAccount(accountVm);
     }
 
     @PostMapping("/message")
     @ResponseStatus(HttpStatus.CREATED)
     public MessageVm sendMessage(@RequestBody MessageVm messageVm){
-//                AccountVm hardcodeMarcusVm = new AccountVm("MarcusSender@gmai.com",new ArrayList<>(),new ArrayList<>());
-//                AccountVm hardcodeHamadaVm = new AccountVm("HamadaReciver@gmai.com",new ArrayList<>(),new ArrayList<>());
-//        MessageVm messageVm1 = new MessageVm("An awsom test messege",hardcodeMarcusVm,hardcodeHamadaVm);
-//        System.out.println("messageVm1 = " + messageVm1);
         System.out.println("messageVm = " + messageVm);
         return accountService.sendMessage(messageVm);
     }
 
     @GetMapping("/message")
     public MessageVm getMessage(@RequestParam Integer id){
+
         MessageVm messageVm = accountService.getMessage(id);
-//        System.out.println("messageVm = " + messageVm);
-//        AccountVm hardcodeMarcusVm = new AccountVm("acc1n@gmail.com",new ArrayList<>(),new ArrayList<>());
-//        AccountVm hardcodeHamadaVm = new AccountVm("acc2n@gmail.com",new ArrayList<>(),new ArrayList<>());
-//        MessageVm messageVm1 = new MessageVm("An awsom test messege",hardcodeMarcusVm,hardcodeHamadaVm);
-//        return messageVm1;
         return messageVm;
+    }
+
+    @GetMapping("/messages")
+    public List<MessageVm> getMessages(){
+        List<MessageVm> messageVms = accountService.getAllMessages();
+        if (!messageVms.isEmpty()){
+            return messageVms;
+        }
+        throw new RuntimeException("no messages found");
     }
 }

@@ -43,7 +43,7 @@ public class AccountService {
     }
 
     public MessageVm sendMessage(MessageVm messageVm){
-        Message message = new Message(messageVm.getText(),convertFromAccountVmToAccount(messageVm.getSender()),convertFromAccountVmToAccount(messageVm.getSender()));
+        Message message = new Message(messageVm.getText(),messageVm.getSender(),messageVm.getReceiver());
         messageRepo.save(message);
         return messageVm;
     }
@@ -54,25 +54,37 @@ public class AccountService {
         return accountVm;
     }
 
+    public MessageVm getMessage(int id){
+        Optional<Message> message = messageRepo.findById(id);
+        Message message1 = new Message(message.get().getId(),message.get().getText(),message.get().getSender(),message.get().getReceiver(),message.get().getDate());
+        if(message.isPresent()){
+            MessageVm messageVm = new MessageVm(message1.getId(), message1.getText(), message1.getDate(),message1.getSender(), message1.getReceiver());
+            return messageVm;
+        }
+        throw new RuntimeException("no message found");
+
+    }
+
+    public List<MessageVm> getAllMessages(){
+        List<Message> allMessages = messageRepo.findAll();
+        List<MessageVm> messageVmList = new ArrayList<>();
+
+        for (Message message : allMessages) {
+            MessageVm messageVm =  new MessageVm(message.getId(), message.getText(), message.getDate(),message.getSender(), message.getReceiver());
+            messageVmList.add(messageVm);
+        }
+        return messageVmList;
+    }
+
     private Account convertFromAccountVmToAccount(AccountVm accountVm){
         return new Account(accountVm.getEmail(),accountVm.getReceivedMessages(),accountVm.getSentMessages());
     }
     private AccountVm convertFromAccountToAccountVm(Account account){
         return new AccountVm(account.getId(),account.getEmail(),account.getReceivedMessages(),account.getSentMessages());
     }
-    public MessageVm getMessage(int id){
-        Optional<Message> message = messageRepo.findById(id);
-        Message message1 = new Message(message.get().getText(),message.get().getSender(),message.get().getReceiver());
-        if(message.isPresent()){
-            MessageVm messageVm = fromMessageToMessegeVm(message1);
-            return messageVm;
-        }
-        throw new RuntimeException("no messege found");
-
-    }
-    private MessageVm fromMessageToMessegeVm(Message message){
-        MessageVm messageVm = new MessageVm(message.getId(), message.getText(), message.getDate(),convertFromAccountToAccountVm(message.getSender()),convertFromAccountToAccountVm(message.getReceiver()));
-        return messageVm;
-    }
+//    private MessageVm fromMessageToMessegeVm(Message message){
+//        MessageVm messageVm = new MessageVm(message.getId(), message.getText(), message.getDate(),message.getSender().,message.getReceiver().getId());
+//        return messageVm;
+//    }
 
 }

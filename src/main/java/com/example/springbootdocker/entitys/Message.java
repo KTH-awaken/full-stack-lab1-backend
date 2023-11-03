@@ -2,10 +2,11 @@ package com.example.springbootdocker.entitys;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Table(name = "message")
@@ -17,20 +18,31 @@ public class Message {
     private String text;
     private Date date;
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "sender")
-    private int senderId;
+    private int sender;
 
-    @ManyToOne
+//    @ManyToOne
     @JoinColumn(name = "receiver")
-    private int receiverId;
+    private int receiver;
 
-    public Message(String text, int senderId, int receiverId) {
+    public Message(String text, int sender, int receiver) {
 //        this.id = generateIntGUID();
         this.text = text;
-        this.date = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        this.senderId = senderId;
-        this.receiverId = receiverId;
+//        this.date = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        this.date = Date.from(ZonedDateTime.now(ZoneId.of("Europe/Stockholm")).toInstant());
+
+//        this.date = Date.from(Instant.now());
+        this.sender = sender;
+        this.receiver = receiver;
+    }
+
+    public Message(int id,String text, int sender, int receiver,Date date) {
+        this.id = id;
+        this.text = text;
+        this.date =date;
+        this.sender = sender;
+        this.receiver = receiver;
     }
 
     public Message() {
@@ -62,19 +74,19 @@ public class Message {
     }
 
     public int getSender() {
-        return senderId;
+        return sender;
     }
 
     public void setSender(int senderId) {
-        this.senderId = senderId;
+        this.sender = senderId;
     }
 
     public int getReceiver() {
-        return receiverId;
+        return receiver;
     }
 
     public void setReceiver(int receiverId) {
-        this.receiverId = receiverId;
+        this.receiver = receiverId;
     }
 
     //    private int generateIntGUID(){

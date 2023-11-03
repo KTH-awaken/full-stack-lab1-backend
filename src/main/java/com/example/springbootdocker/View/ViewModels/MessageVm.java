@@ -11,20 +11,20 @@ public class MessageVm {
     private String text;
     private Date date;
 
-    private AccountVm sender;
-    private AccountVm receiver;
+    private int senderId;
+    private int receiverId;
 
-    public MessageVm(int id,String text, Date date, AccountVm sender, AccountVm receiver) {
+    public MessageVm(int id,String text, Date date, int senderId, int receiverId) {
         this.id = id;
         this.text = text;
         this.date = date;
-        this.sender = sender;
-        this.receiver = receiver;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
     }
-    public MessageVm(String text,  AccountVm sender, AccountVm receiver) {
+    public MessageVm(String text,  int senderId, int receiverId) {
         this.text = text;
-        this.sender = sender;
-        this.receiver = receiver;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
     }
 
     public MessageVm() {
@@ -55,19 +55,19 @@ public class MessageVm {
         this.date = date;
     }
 
-    public AccountVm getSender() {
-        return sender;
+    public int getSender() {
+        return senderId;
     }
 
-    public void setSender(AccountVm sender) {
-        this.sender = sender;
+    public void setSender(int senderId) {
+        this.senderId = senderId;
     }
 
-    public AccountVm getReceiver() {
-        return receiver;
+    public int getReceiver() {
+        return receiverId;
     }
 
-    public void setReceiver(AccountVm receiver) {
-        this.receiver = receiver;
+    public void setReceiver(int receiverId) {
+        this.receiverId = receiverId;
     }
 }
