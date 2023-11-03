@@ -1,4 +1,4 @@
-package com.example.springbootdocker.View.impl;
+package com.example.springbootdocker.View.ViewModels;
 
 import jakarta.persistence.Id;
 

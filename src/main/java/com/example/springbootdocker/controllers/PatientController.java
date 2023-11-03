@@ -1,8 +1,8 @@
 package com.example.springbootdocker.controllers;
 
 //import com.example.springbootdocker.entitys.Patient;
-import com.example.springbootdocker.View.impl.PatientService;
-import com.example.springbootdocker.View.impl.PatientVm;
+import com.example.springbootdocker.core.PatientService;
+import com.example.springbootdocker.View.ViewModels.PatientVm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

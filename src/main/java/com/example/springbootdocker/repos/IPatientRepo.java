@@ -1,4 +1,4 @@
-package com.example.springbootdocker.repos.impl;
+package com.example.springbootdocker.repos;
 
 import com.example.springbootdocker.entitys.Patient;
 

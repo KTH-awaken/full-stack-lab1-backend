@@ -1,4 +1,4 @@
-package com.example.springbootdocker.View.impl;
+package com.example.springbootdocker.core;
 
 import com.example.springbootdocker.View.ViewModels.MessageVm;
 import com.example.springbootdocker.View.ViewModels.PatientVm;
@@ -76,6 +76,7 @@ public class PatientService {
 
         return patientVmList;
     }
+
 
 
 

@@ -1,8 +1,8 @@
 package com.example.springbootdocker.entitys;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,6 +15,14 @@ public class Patient {
     private String name;
     private int age;
     private String mCondition;
+    @OneToOne
+    private Account account;
+//todo remove
+//    @OneToMany(mappedBy = "receiver")
+//    private List<Message> receivedMessages;
+//
+//    @OneToMany(mappedBy = "sender")
+//    private List<Message> sentMessages;
 
     public Patient( String name, int age,String mCondition) {
         this.id = generateIntGUID();
@@ -68,6 +76,8 @@ public class Patient {
         System.out.println("generatedInt = " + generatedInt);
         return generatedInt;
     }
+
+//    private void sendMessage()
 
     @Override
     public String toString() {
