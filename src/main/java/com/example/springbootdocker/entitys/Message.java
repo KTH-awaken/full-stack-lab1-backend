@@ -89,11 +89,6 @@ public class Message {
         this.receiver = receiverId;
     }
 
-    //    private int generateIntGUID(){
-//        UUID uuid = UUID.randomUUID();
-//        long mostSignificantBits = uuid.getMostSignificantBits();
-//        int generatedInt = (int) mostSignificantBits;
-//        return generatedInt;
-//    }
+
 
 }

@@ -12,6 +12,8 @@ public class Account {
     @Column(name ="id")
     int id;
     private String email;
+    private String name;
+    private int age;
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private List<Message> receivedMessages;
@@ -19,10 +21,12 @@ public class Account {
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<Message> sentMessages;
 
-    public Account(String email, List<Message> receivedMessages, List<Message> sentMessages) {
+    public Account(String email, List<Message> receivedMessages, List<Message> sentMessages,String name,int age) {
         this.email = email;
         this.receivedMessages = receivedMessages;
         this.sentMessages = sentMessages;
+        this.name = name;
+        this.age = age;
     }
 
     public Account() {
@@ -57,4 +61,23 @@ public class Account {
         this.sentMessages = sentMessages;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

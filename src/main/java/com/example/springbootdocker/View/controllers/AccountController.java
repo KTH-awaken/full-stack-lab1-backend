@@ -1,4 +1,4 @@
-package com.example.springbootdocker.controllers;
+package com.example.springbootdocker.View.controllers;
 import com.example.springbootdocker.View.ViewModels.AccountVm;
 import com.example.springbootdocker.View.ViewModels.MessageVm;
 import com.example.springbootdocker.core.AccountService;

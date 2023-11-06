@@ -1,4 +1,4 @@
-package com.example.springbootdocker.controllers;
+package com.example.springbootdocker.View.controllers;
 
 //import com.example.springbootdocker.entitys.Patient;
 import com.example.springbootdocker.core.PatientService;
@@ -23,11 +23,9 @@ public class PatientController {
     @GetMapping("/patient")
     public PatientVm getPatient(@RequestParam Integer id){
         Optional patient = patientService.getPatient(id);
-        System.out.println("patient in controller = " + patient);
         if (patient.isPresent()){
             return (PatientVm) patient.get();
         }
-        //todo returna en vm istllät och thow exception
        throw new RuntimeException("No patient with the id "+id);
     }
 
@@ -44,9 +42,6 @@ public class PatientController {
     @PostMapping("/patient")
     @ResponseStatus(HttpStatus.CREATED)
     public PatientVm createPatient(@RequestBody PatientVm patient){
-        //todo remove hårdkodning
-        System.out.println("patient in controller = " + patient);
-        System.out.println("patient.getId() = " + patient.getId());
         return patientService.createPatient(patient);
     }
 

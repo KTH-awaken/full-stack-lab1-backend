@@ -6,15 +6,14 @@ import java.util.UUID;
 
 public class PatientVm {
     private int id;
-    private String name;
-    private int age;
-    private String mCondition;
 
-    public PatientVm( int id, String name, int age,String mCondition) {
+    private String mCondition;
+    private AccountVm accountVm;
+
+    public PatientVm( int id, String mCondition,AccountVm accountVm) {
         this.id = id;
-        this.name = name;
-        this.age = age;
         this.mCondition = mCondition;
+        this.accountVm = accountVm;
     }
 
     public PatientVm() {
@@ -38,30 +37,20 @@ public class PatientVm {
         this.mCondition = mCondition;
     }
 
-    public String getName() {
-        return name;
+
+    public AccountVm getAccountVm() {
+        return accountVm;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccountVm(AccountVm accountVm) {
+        this.accountVm = accountVm;
     }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-
 
     @Override
     public String toString() {
         return "Patient{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
+
                 ", mCondition='" + mCondition + '\'' +
                 '}';
     }
