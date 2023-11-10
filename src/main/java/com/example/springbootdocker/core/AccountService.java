@@ -1,7 +1,6 @@
 package com.example.springbootdocker.core;
 
-import com.example.springbootdocker.View.ViewModels.AccountVm;
-import com.example.springbootdocker.View.ViewModels.MessageVm;
+import com.example.springbootdocker.View.ViewModels.*;
 import com.example.springbootdocker.entitys.Account;
 import com.example.springbootdocker.entitys.Message;
 import com.example.springbootdocker.repos.IAccountRepo;
@@ -16,16 +15,23 @@ import java.util.Optional;
 public class AccountService {
     private IAccountRepo accountRepo;
     private IMessageRepo messageRepo;
+    private PatientService patientService;
+    private DoctorService doctorService;
+    private EmployeeService employeeService;
 
-    public AccountService(IAccountRepo accountRepo, IMessageRepo messageRepo) {
+
+    public AccountService(IAccountRepo accountRepo, IMessageRepo messageRepo, PatientService patientService,DoctorService doctorService,EmployeeService employeeService) {
         this.accountRepo = accountRepo;
         this.messageRepo = messageRepo;
+        this.patientService = patientService;
+        this.doctorService = doctorService;
+        this.employeeService =employeeService;
     }
 
     public AccountVm getAccount(Integer id){
         java.util.Optional<Account> account = accountRepo.findById(id);
         if (account.isPresent()){
-            AccountVm accountVm = new AccountVm(account.get().getId(),account.get().getEmail(),account.get().getReceivedMessages(), account.get().getSentMessages(),account.get().getName(),account.get().getAge());
+            AccountVm accountVm = new AccountVm(account.get().getId(),account.get().getEmail(),account.get().getReceivedMessages(), account.get().getSentMessages(),account.get().getFirstName(),account.get().getLastName(),account.get().getAge());
             return accountVm;
         }
         throw new RuntimeException("couldn't find account with id: "+id);
@@ -37,22 +43,28 @@ public class AccountService {
 
         for (Account account : allAccounts) {
             AccountVm accountVm = ConverterUtil.convertFromAccountToAccountVm(account);
-//            AccountVm accountVm =  new AccountVm(account.getId(),account.getEmail(),account.getReceivedMessages(), account.getSentMessages(),account.getName(),account.getAge());
             accountVmList.add(accountVm);
         }
         return accountVmList;
     }
 
     public MessageVm sendMessage(MessageVm messageVm){
-//        Message message = new Message(messageVm.getText(),messageVm.getSender(),messageVm.getReceiver());
         Message message = ConverterUtil.convertFromMessageVmToMessage(messageVm);
         messageRepo.save(message);
         return messageVm;
     }
 
     public AccountVm createAccount(AccountVm accountVm){
-        Account account = ConverterUtil.convertFromAccountVmToAccount(accountVm);
-        accountRepo.save(account);
+        String type = accountVm.getType();
+        System.out.println("type  in create acount= " + type);
+        switch (type){
+            case "Patient":patientService.createPatient(new PatientVm(accountVm));break;
+            case "Doctor":doctorService.createDoctor(new DoctorVm(accountVm));break;
+            case "Employee": employeeService.createEmployee(new EmployeeVm(accountVm));break;
+            default: throw new RuntimeException("Incorrect user type : "+type);
+        }
+//        Account account = ConverterUtil.convertFromAccountVmToAccount(accountVm);
+//        accountRepo.save(account);
         return accountVm;
     }
 
@@ -64,7 +76,6 @@ public class AccountService {
             return messageVm;
         }
         throw new RuntimeException("no message found");
-
     }
 
     public List<MessageVm> getAllMessages(){

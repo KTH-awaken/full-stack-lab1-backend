@@ -21,7 +21,8 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest request){
         var account = new Account();
-        account.setName(request.getName());
+        account.setFirstName(request.getFirstName());
+        account.setLastName(request.getLastName());
         account.setEmail(request.getEmail());
         account.setPassword(passwordEncoder.encode(request.getPassword()));
         account.setRole(request.getRole());

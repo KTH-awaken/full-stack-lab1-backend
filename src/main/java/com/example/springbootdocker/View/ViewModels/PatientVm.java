@@ -15,7 +15,10 @@ public class PatientVm {
         this.mCondition = mCondition;
         this.accountVm = accountVm;
     }
-
+    public PatientVm(AccountVm accountVm) {
+        this.mCondition = "Default";
+        this.accountVm = accountVm;
+    }
     public PatientVm() {
 
     }

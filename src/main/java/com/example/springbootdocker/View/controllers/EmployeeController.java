@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,6 +25,14 @@ public class EmployeeController {
         if (employee.isPresent())return (EmployeeVm) employee.get();
 
         throw new RuntimeException("No Employee with id: "+id);
+    }
+    @GetMapping("/employees")
+    public List<EmployeeVm> getDoctors(){
+        List<EmployeeVm> allEmployees = employeeService.getAllEmployees();
+        if (!allEmployees.isEmpty()){
+            return allEmployees;
+        }
+        throw new RuntimeException("No employees found in db");
     }
 
     @PostMapping("/employee")

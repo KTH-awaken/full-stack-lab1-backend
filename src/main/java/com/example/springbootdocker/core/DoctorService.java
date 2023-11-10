@@ -7,6 +7,8 @@ import com.example.springbootdocker.entitys.Patient;
 import com.example.springbootdocker.repos.IDoctorRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,8 +29,19 @@ public class DoctorService {
         return Optional.empty();
     }
 
+    public List<DoctorVm> getAllDoctors(){
+        List<Doctor> allDoctors = doctorRepo.findAll();
+        List<DoctorVm> doctorVms = new ArrayList<>();
+        for (Doctor d:allDoctors) {
+            doctorVms.add(ConverterUtil.convertFromDoctorToDoctorVm(d));
+        }
+        return doctorVms;
+    }
+
     public void createDoctor(DoctorVm doctorVm){
+        System.out.println("doctorVm = in create doctor" + doctorVm.toString());
         Doctor doctor = ConverterUtil.convertFromDoctorVmToDoctor(doctorVm);
+        System.out.println("doctor = after convert " + doctor.toString());
         doctorRepo.save(doctor);
     }
 }

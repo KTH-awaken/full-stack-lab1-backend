@@ -8,6 +8,9 @@ public class EmployeeVm {
         this.id = id;
         this.accountVm = accountVm;
     }
+    public EmployeeVm(AccountVm accountVm) {
+        this.accountVm = accountVm;
+    }
 
     public EmployeeVm() {
     }

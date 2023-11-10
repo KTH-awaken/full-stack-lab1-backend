@@ -9,7 +9,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id")
     private int id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
     public Employee(Account account) {

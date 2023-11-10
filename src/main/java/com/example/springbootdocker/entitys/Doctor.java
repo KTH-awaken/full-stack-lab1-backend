@@ -9,7 +9,7 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id")
     private int id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
     public Doctor(Account account) {
@@ -33,5 +33,13 @@ public class Doctor {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "id=" + id +
+                ", account=" + account +
+                '}';
     }
 }

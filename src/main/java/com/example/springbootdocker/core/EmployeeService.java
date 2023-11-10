@@ -7,6 +7,8 @@ import com.example.springbootdocker.entitys.Employee;
 import com.example.springbootdocker.repos.IEmployeeRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,9 +29,18 @@ public class EmployeeService {
             return Optional.empty();
         }
     }
+    public List<EmployeeVm> getAllEmployees() {
+        List<Employee> employees = employeeRepo.findAll();
+        List<EmployeeVm> employeeVms = new ArrayList<>();
+        for (Employee e:employees) {
+            employeeVms.add(ConverterUtil.convertFromEmployeeToEmplyeeVm(e));
+        }
+        return employeeVms;
+    }
 
     public void createEmployee(EmployeeVm employeeVm){
         Employee employee = ConverterUtil.convertFromEmployeeVmToEmplyee(employeeVm);
         employeeRepo.save(employee);
     }
+
 }

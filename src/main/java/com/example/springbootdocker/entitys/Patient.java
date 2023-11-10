@@ -13,7 +13,7 @@ public class Patient {
     @Column(name ="id")
     private int id;
     private String mCondition;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
     public Patient( String mCondition,Account account) {
@@ -42,15 +42,6 @@ public class Patient {
     public void setmCondition(String mCondition) {
         this.mCondition = mCondition;
     }
-
-
-//    private int generateIntGUID(){
-//        UUID uuid = UUID.randomUUID();
-//        long mostSignificantBits = uuid.getMostSignificantBits();
-//        int generatedInt = (int) mostSignificantBits;
-//        System.out.println("generatedInt = " + generatedInt);
-//        return generatedInt;
-//    }
 
     public Account getAccount() {
         return account;

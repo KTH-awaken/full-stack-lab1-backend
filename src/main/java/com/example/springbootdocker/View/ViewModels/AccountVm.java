@@ -11,24 +11,27 @@ public class AccountVm {
     private String email;
     private List<Message> receivedMessages;
     private List<Message> sentMessages;
-    private String name;
+    private String firstName;
+    private String lastName;
     private int age;
     private String type;
     private String password;
 
-    public AccountVm(int id,String email, List<Message> receivedMessages, List<Message> sentMessages,String name,int age) {
+    public AccountVm(int id,String email, List<Message> receivedMessages, List<Message> sentMessages,String firstName,String lastName,int age) {
         this.id = id;
         this.email = email;
         this.receivedMessages = receivedMessages;
         this.sentMessages = sentMessages;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
     }
-    public AccountVm(String email,String name,String type,String password) {
+    public AccountVm(String email,String firstName,String lastName,String type,String password) {
         this.email = email;
         this.receivedMessages = new ArrayList<>();
         this.sentMessages = new ArrayList<>();
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = -1;
         this.type = type;
         this.password = password;
@@ -69,13 +72,6 @@ public class AccountVm {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getAge() {
         return age;
@@ -91,5 +87,44 @@ public class AccountVm {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountVm{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", receivedMessages=" + receivedMessages +
+                ", sentMessages=" + sentMessages +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", type='" + type + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

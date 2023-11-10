@@ -19,7 +19,8 @@ public class Account implements UserDetails {
 
     @Column(unique = true)
     private String email;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -32,18 +33,20 @@ public class Account implements UserDetails {
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<Message> sentMessages;
 
-    public Account(String email, List<Message> receivedMessages, List<Message> sentMessages,String name,int age) {
+    public Account(String email, List<Message> receivedMessages, List<Message> sentMessages,String firstName,String lastName,int age) {
         this.email = email;
         this.receivedMessages = receivedMessages;
         this.sentMessages = sentMessages;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
     }
 
-    public Account(int id, String email, String name, String password, Role role, int age, List<Message> receivedMessages, List<Message> sentMessages) {
+    public Account(int id, String email, String firstName,String lastName, String password, Role role, int age, List<Message> receivedMessages, List<Message> sentMessages) {
         this.id = id;
         this.email = email;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
         this.role = role;
         this.age = age;
@@ -133,12 +136,21 @@ public class Account implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getAge() {

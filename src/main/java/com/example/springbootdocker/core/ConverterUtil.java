@@ -10,10 +10,10 @@ public class ConverterUtil {
 
     //Account
     public static Account convertFromAccountVmToAccount(AccountVm accountVm){
-        return new Account(accountVm.getEmail(),accountVm.getReceivedMessages(),accountVm.getSentMessages(),accountVm.getName(),accountVm.getAge());
+        return new Account(accountVm.getEmail(),accountVm.getReceivedMessages(),accountVm.getSentMessages(),accountVm.getFirstName(), accountVm.getLastName(), accountVm.getAge());
     }
     public static AccountVm convertFromAccountToAccountVm(Account account){
-        return new AccountVm(account.getId(),account.getEmail(),account.getReceivedMessages(),account.getSentMessages(), account.getName(), account.getAge());
+        return new AccountVm(account.getId(),account.getEmail(),account.getReceivedMessages(),account.getSentMessages(), account.getFirstName(),account.getLastName(), account.getAge());
     }
     //Patient
     public static PatientVm convertFromPatientToPatientVM(Patient patient){
@@ -44,8 +44,15 @@ public class ConverterUtil {
     public static Doctor convertFromDoctorVmToDoctor(DoctorVm doctorVm) {
         return new Doctor(convertFromAccountVmToAccount(doctorVm.getAccountVm()));
     }
+    public static DoctorVm convertFromDoctorToDoctorVm(Doctor doctor) {
+        return new DoctorVm(convertFromAccountToAccountVm(doctor.getAccount()));
+    }
     public static Employee convertFromEmployeeVmToEmplyee(EmployeeVm employeeVm) {
         return new Employee(convertFromAccountVmToAccount(employeeVm.getAccountVm()));
+    }
+
+    public static EmployeeVm convertFromEmployeeToEmplyeeVm(Employee employee) {
+        return new EmployeeVm(convertFromAccountToAccountVm(employee.getAccount()));
     }
     //Observation
     public static Observation convertFromObservationVmToObservation(ObservationVm observationVm) {
@@ -79,4 +86,6 @@ public class ConverterUtil {
     public static Encounter convertFromEncounterVmToEncounter(EncounterVm encounterVm) {
         return new Encounter(encounterVm.getWorkerId(),encounterVm.getPatientId(),convertFromObservationVmToObservationList(encounterVm.getObservationVms()));
     }
+
+
 }

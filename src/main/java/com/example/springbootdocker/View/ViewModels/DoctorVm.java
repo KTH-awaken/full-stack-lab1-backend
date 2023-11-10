@@ -8,6 +8,9 @@ public class DoctorVm {
         this.id = id;
         this.accountVm = accountVm;
     }
+    public DoctorVm( AccountVm accountVm) {
+        this.accountVm = accountVm;
+    }
 
     public DoctorVm() {
     }
@@ -26,5 +29,13 @@ public class DoctorVm {
 
     public void setAccountVm(AccountVm accountVm) {
         this.accountVm = accountVm;
+    }
+
+    @Override
+    public String toString() {
+        return "DoctorVm{" +
+                "id=" + id +
+                ", accountVm=" + accountVm +
+                '}';
     }
 }
