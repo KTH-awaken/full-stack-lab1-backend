@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -37,7 +38,7 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean isTokenValid(String token, Account account) {
+    public boolean isTokenValid(String token, UserDetails account) {
         String username = extractUsername(token);
         Date expiration = Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())

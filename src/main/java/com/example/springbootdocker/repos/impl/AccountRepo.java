@@ -164,7 +164,7 @@ public class AccountRepo implements IAccountRepo {
     }
 
     @Override
-    public Optional<Account> findByEmail(String email) {
-        return Optional.empty();
+    public Account findByEmail(String email) {
+        return null;
     }
 }
