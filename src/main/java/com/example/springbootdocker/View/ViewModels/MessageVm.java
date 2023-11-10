@@ -20,6 +20,7 @@ public class MessageVm {
         this.date = date;
         this.senderId = senderId;
         this.receiverId = receiverId;
+
     }
     public MessageVm(String text,  int senderId, int receiverId) {
         this.text = text;

@@ -10,6 +10,8 @@ public class EncounterVm {
     private int patientId;
     private Date date;
     private List<ObservationVm> observationVms;
+    //todo läg in titel
+    //todo läg name för worker för att visa
 
     public EncounterVm(int id, int workerId, int patientId, Date date, List<ObservationVm> observationVms) {
         this.id = id;

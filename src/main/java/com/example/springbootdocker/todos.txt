@@ -1,0 +1,7 @@
+//todo
+läg discription
+titel i encounter
+
+läg in egen klass för kcondition
+
+todo läg en controller metod för att hämat mesege preview
