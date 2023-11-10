@@ -34,6 +34,9 @@ public class AccountVm {
         this.password = password;
     }
 
+    public AccountVm() {
+    }
+
     public int getId() {
         return id;
     }

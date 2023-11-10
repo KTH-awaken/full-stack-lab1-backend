@@ -28,7 +28,6 @@ public class AccountController {
     @GetMapping("/accounts")
     public List<AccountVm> getAccounts(){
         List<AccountVm> accountVms = accountService.getAllAccounts();
-        accountVms.add(new AccountVm("TestEmal","testName","Patient","1234"));
         if(!accountVms.isEmpty()){
             return accountVms;
         }
@@ -40,7 +39,10 @@ public class AccountController {
     public AccountVm createAccount(@RequestBody AccountVm accountVm){
         System.out.println("yo 1");
         System.out.println("accountVm = " + accountVm);
+//        AccountVm test=  new AccountVm("TestEmal","testName","Patient","1234");
+//        AccountVm test2 = new AccountVm(100,"hej",new ArrayList<>(),new ArrayList<>(),"hej",20);
         return accountService.createAccount(accountVm);
+//        return accountService.createAccount(accountVm);
     }
 
     @PostMapping("/message")
