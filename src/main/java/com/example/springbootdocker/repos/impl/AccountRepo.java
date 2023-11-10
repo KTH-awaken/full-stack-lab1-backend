@@ -162,4 +162,9 @@ public class AccountRepo implements IAccountRepo {
     public Page<Account> findAll(Pageable pageable) {
         return null;
     }
+
+    @Override
+    public Account findByEmail(String email) {
+        return null;
+    }
 }
