@@ -28,6 +28,7 @@ public class AccountController {
     @GetMapping("/accounts")
     public List<AccountVm> getAccounts(){
         List<AccountVm> accountVms = accountService.getAllAccounts();
+        accountVms.add(new AccountVm("TestEmal","testName","Patient","1234"));
         if(!accountVms.isEmpty()){
             return accountVms;
         }
@@ -37,6 +38,8 @@ public class AccountController {
     @PostMapping("/account")
     @ResponseStatus(HttpStatus.CREATED)
     public AccountVm createAccount(@RequestBody AccountVm accountVm){
+        System.out.println("yo 1");
+        System.out.println("accountVm = " + accountVm);
         return accountService.createAccount(accountVm);
     }
 

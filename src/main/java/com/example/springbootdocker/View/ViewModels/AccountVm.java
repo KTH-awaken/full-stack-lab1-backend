@@ -3,6 +3,7 @@ package com.example.springbootdocker.View.ViewModels;
 import com.example.springbootdocker.entitys.Message;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountVm {
@@ -12,6 +13,8 @@ public class AccountVm {
     private List<Message> sentMessages;
     private String name;
     private int age;
+    private String type;
+    private String password;
 
     public AccountVm(int id,String email, List<Message> receivedMessages, List<Message> sentMessages,String name,int age) {
         this.id = id;
@@ -20,6 +23,15 @@ public class AccountVm {
         this.sentMessages = sentMessages;
         this.name = name;
         this.age = age;
+    }
+    public AccountVm(String email,String name,String type,String password) {
+        this.email = email;
+        this.receivedMessages = new ArrayList<>();
+        this.sentMessages = new ArrayList<>();
+        this.name = name;
+        this.age = -1;
+        this.type = type;
+        this.password = password;
     }
 
     public int getId() {
@@ -68,5 +80,13 @@ public class AccountVm {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
