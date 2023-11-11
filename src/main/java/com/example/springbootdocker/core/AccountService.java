@@ -64,7 +64,7 @@ public class AccountService {
         System.out.println("type  in create acount= " + userType);
         switch (userType){
             case PATIENT: patientService.createPatient(new PatientVm(accountVm));break;
-            case DOCTOR:doctorService.createDoctor(new DoctorVm(accountVm));break;
+            case DOCTOR: doctorService.createDoctor(new DoctorVm(accountVm));break;
             case EMPLOYEE: employeeService.createEmployee(new EmployeeVm(accountVm));break;
             default: throw new RuntimeException("Incorrect user type : "+ userType);
         }

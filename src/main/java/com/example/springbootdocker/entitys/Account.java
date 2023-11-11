@@ -5,11 +5,12 @@ import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Builder
+//@Builder
 @Table(name = "account")
 public class Account implements UserDetails {
     @Id
@@ -33,26 +34,17 @@ public class Account implements UserDetails {
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<Message> sentMessages;
 
-    public Account(String email, List<Message> receivedMessages, List<Message> sentMessages,String firstName,String lastName,int age) {
+    public Account(String email, String firstName, String lastName, int age, UserType userType, String password,List<Message>receivedMessages, List<Message> sentMessages) {
         this.email = email;
-        this.receivedMessages = receivedMessages;
-        this.sentMessages = sentMessages;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.userType = userType;
+        this.password = password;
+        this.receivedMessages = receivedMessages;
+        this.sentMessages = sentMessages;
     }
 
-    public Account(int id, String email, String firstName, String lastName, String password, UserType userType, int age, List<Message> receivedMessages, List<Message> sentMessages) {
-        this.id = id;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.userType = userType;
-        this.age = age;
-        this.receivedMessages = receivedMessages;
-        this.sentMessages = sentMessages;
-    }
 
     public Account() {
 

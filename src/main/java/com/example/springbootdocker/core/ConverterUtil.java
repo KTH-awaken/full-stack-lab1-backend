@@ -10,10 +10,20 @@ public class ConverterUtil {
 
     //Account
     public static Account convertFromAccountVmToAccount(AccountVm accountVm){
-        return new Account(accountVm.getEmail(),accountVm.getReceivedMessages(),accountVm.getSentMessages(),accountVm.getFirstName(), accountVm.getLastName(), accountVm.getAge());
+        return new Account(
+                accountVm.getEmail(),
+                accountVm.getFirstName(),
+                accountVm.getLastName(),
+                accountVm.getAge(),
+                accountVm.getType(),
+                accountVm.getPassword(),
+                accountVm.getReceivedMessages(),
+                accountVm.getSentMessages()
+        );
+
     }
     public static AccountVm convertFromAccountToAccountVm(Account account){
-        return new AccountVm(account.getId(),account.getEmail(),account.getReceivedMessages(),account.getSentMessages(), account.getFirstName(),account.getLastName(), account.getAge());
+        return new AccountVm(account.getId(),account.getEmail(),account.getFirstName(), account.getLastName() ,account.getAge(),account.getUserType(),account.getPassword(),account.getReceivedMessages(),account.getSentMessages());
     }
     //Patient
     public static PatientVm convertFromPatientToPatientVM(Patient patient){
@@ -47,11 +57,11 @@ public class ConverterUtil {
     public static DoctorVm convertFromDoctorToDoctorVm(Doctor doctor) {
         return new DoctorVm(convertFromAccountToAccountVm(doctor.getAccount()));
     }
-    public static Employee convertFromEmployeeVmToEmplyee(EmployeeVm employeeVm) {
+    public static Employee convertFromEmployeeVmToEmployee(EmployeeVm employeeVm) {
         return new Employee(convertFromAccountVmToAccount(employeeVm.getAccountVm()));
     }
 
-    public static EmployeeVm convertFromEmployeeToEmplyeeVm(Employee employee) {
+    public static EmployeeVm convertFromEmployeeToEmployeeVm(Employee employee) {
         return new EmployeeVm(convertFromAccountToAccountVm(employee.getAccount()));
     }
     //Observation

@@ -1,8 +1,6 @@
 package com.example.springbootdocker.core;
 
 import com.example.springbootdocker.View.ViewModels.EmployeeVm;
-import com.example.springbootdocker.View.ViewModels.EmployeeVm;
-import com.example.springbootdocker.entitys.Doctor;
 import com.example.springbootdocker.entitys.Employee;
 import com.example.springbootdocker.repos.IEmployeeRepo;
 import org.springframework.stereotype.Service;
@@ -33,13 +31,13 @@ public class EmployeeService {
         List<Employee> employees = employeeRepo.findAll();
         List<EmployeeVm> employeeVms = new ArrayList<>();
         for (Employee e:employees) {
-            employeeVms.add(ConverterUtil.convertFromEmployeeToEmplyeeVm(e));
+            employeeVms.add(ConverterUtil.convertFromEmployeeToEmployeeVm(e));
         }
         return employeeVms;
     }
 
     public void createEmployee(EmployeeVm employeeVm){
-        Employee employee = ConverterUtil.convertFromEmployeeVmToEmplyee(employeeVm);
+        Employee employee = ConverterUtil.convertFromEmployeeVmToEmployee(employeeVm);
         employeeRepo.save(employee);
     }
 

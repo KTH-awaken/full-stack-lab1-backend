@@ -26,19 +26,30 @@ public class AccountVm {
         this.lastName = lastName;
         this.age = age;
     }
-    public AccountVm(String email, String firstName, String lastName, UserType userType, String password) {
+    public AccountVm(int id, String email, String firstName, String lastName, int age, UserType userType, String password,List<Message>receivedMessages, List<Message> sentMessages) {
+        this.id = id;
         this.email = email;
-        this.receivedMessages = new ArrayList<>();
-        this.sentMessages = new ArrayList<>();
+        this.receivedMessages = receivedMessages;
+        this.sentMessages = sentMessages;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = -1;
+        this.age = age;
+        this.userType = userType;
+        this.password = password;
+    }
+    public AccountVm(int id, String email, String firstName, String lastName, int age, UserType userType, String password) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
         this.userType = userType;
         this.password = password;
     }
 
     public AccountVm() {
     }
+
 
     public int getId() {
         return id;
