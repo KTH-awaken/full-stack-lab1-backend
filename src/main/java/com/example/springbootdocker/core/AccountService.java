@@ -3,6 +3,7 @@ package com.example.springbootdocker.core;
 import com.example.springbootdocker.View.ViewModels.*;
 import com.example.springbootdocker.entitys.Account;
 import com.example.springbootdocker.entitys.Message;
+import com.example.springbootdocker.entitys.UserType;
 import com.example.springbootdocker.repos.IAccountRepo;
 import com.example.springbootdocker.repos.IMessageRepo;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,10 @@ public class AccountService {
         return accountVmList;
     }
 
+    public AccountVm findAccountByEmail(String email){
+        return ConverterUtil.convertFromAccountToAccountVm(accountRepo.findByEmail(email));
+    }
+
     public MessageVm sendMessage(MessageVm messageVm){
         Message message = ConverterUtil.convertFromMessageVmToMessage(messageVm);
         messageRepo.save(message);
@@ -55,13 +60,13 @@ public class AccountService {
     }
 
     public AccountVm createAccount(AccountVm accountVm){
-        String type = accountVm.getType();
-        System.out.println("type  in create acount= " + type);
-        switch (type){
-            case "Patient":patientService.createPatient(new PatientVm(accountVm));break;
-            case "Doctor":doctorService.createDoctor(new DoctorVm(accountVm));break;
-            case "Employee": employeeService.createEmployee(new EmployeeVm(accountVm));break;
-            default: throw new RuntimeException("Incorrect user type : "+type);
+        UserType userType = accountVm.getType();
+        System.out.println("type  in create acount= " + userType);
+        switch (userType){
+            case PATIENT: patientService.createPatient(new PatientVm(accountVm));break;
+            case DOCTOR:doctorService.createDoctor(new DoctorVm(accountVm));break;
+            case EMPLOYEE: employeeService.createEmployee(new EmployeeVm(accountVm));break;
+            default: throw new RuntimeException("Incorrect user type : "+ userType);
         }
 //        Account account = ConverterUtil.convertFromAccountVmToAccount(accountVm);
 //        accountRepo.save(account);

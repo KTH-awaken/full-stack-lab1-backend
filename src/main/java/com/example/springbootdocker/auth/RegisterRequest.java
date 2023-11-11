@@ -1,7 +1,7 @@
 package com.example.springbootdocker.auth;
 
 
-import com.example.springbootdocker.entitys.Role;
+import com.example.springbootdocker.entitys.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +14,5 @@ public class RegisterRequest {
     private String lastName;
     private String email;
     private String password;
-    private Role role;
+    private UserType userType;
 }

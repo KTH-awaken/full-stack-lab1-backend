@@ -1,7 +1,7 @@
 package com.example.springbootdocker.View.ViewModels;
 
 import com.example.springbootdocker.entitys.Message;
-import jakarta.persistence.*;
+import com.example.springbootdocker.entitys.UserType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class AccountVm {
     private String firstName;
     private String lastName;
     private int age;
-    private String type;
+    private UserType userType;
     private String password;
 
     public AccountVm(int id,String email, List<Message> receivedMessages, List<Message> sentMessages,String firstName,String lastName,int age) {
@@ -26,14 +26,14 @@ public class AccountVm {
         this.lastName = lastName;
         this.age = age;
     }
-    public AccountVm(String email,String firstName,String lastName,String type,String password) {
+    public AccountVm(String email, String firstName, String lastName, UserType userType, String password) {
         this.email = email;
         this.receivedMessages = new ArrayList<>();
         this.sentMessages = new ArrayList<>();
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = -1;
-        this.type = type;
+        this.userType = userType;
         this.password = password;
     }
 
@@ -81,12 +81,12 @@ public class AccountVm {
         this.age = age;
     }
 
-    public String getType() {
-        return type;
+    public UserType getType() {
+        return userType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(UserType userType) {
+        this.userType = userType;
     }
 
     public String getFirstName() {
@@ -123,7 +123,7 @@ public class AccountVm {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", type='" + type + '\'' +
+                ", type='" + userType + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

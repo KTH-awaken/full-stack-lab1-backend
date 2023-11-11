@@ -24,7 +24,7 @@ public class Account implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private UserType userType;
     private int age;
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
@@ -42,13 +42,13 @@ public class Account implements UserDetails {
         this.age = age;
     }
 
-    public Account(int id, String email, String firstName,String lastName, String password, Role role, int age, List<Message> receivedMessages, List<Message> sentMessages) {
+    public Account(int id, String email, String firstName, String lastName, String password, UserType userType, int age, List<Message> receivedMessages, List<Message> sentMessages) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.role = role;
+        this.userType = userType;
         this.age = age;
         this.receivedMessages = receivedMessages;
         this.sentMessages = sentMessages;
@@ -96,12 +96,12 @@ public class Account implements UserDetails {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     public int getId() {

@@ -1,5 +1,6 @@
 package com.example.springbootdocker.auth.config;
 
+import com.example.springbootdocker.View.ViewModels.AccountVm;
 import com.example.springbootdocker.entitys.Account;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -27,11 +28,11 @@ public class JwtService {
     }
 
 
-    public String generateToken(Account account){
+    public String generateToken(AccountVm account){
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + EXPIRATION_TIME);
         return Jwts.builder()
-                .setSubject(account.getUsername())
+                .setSubject(account.getEmail())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)

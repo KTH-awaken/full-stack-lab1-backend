@@ -1,7 +1,9 @@
 package com.example.springbootdocker.auth;
 
 
+import com.example.springbootdocker.View.ViewModels.AccountVm;
 import com.example.springbootdocker.auth.config.JwtService;
+import com.example.springbootdocker.core.AccountService;
 import com.example.springbootdocker.entitys.Account;
 import com.example.springbootdocker.repos.IAccountRepo;
 import lombok.RequiredArgsConstructor;
@@ -18,19 +20,21 @@ public class AuthService {
     private final IAccountRepo repository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final AccountService accountService;
 
     public AuthResponse register(RegisterRequest request){
-        var account = new Account();
+
+        AccountVm account = new AccountVm();
         account.setFirstName(request.getFirstName());
         account.setLastName(request.getLastName());
         account.setEmail(request.getEmail());
         account.setPassword(passwordEncoder.encode(request.getPassword()));
-        account.setRole(request.getRole());
+        account.setType(request.getUserType());
+        accountService.createAccount(account);
 
-        repository.save(account);
 
         String jwtToken = jwtService.generateToken(account);
-        return new AuthResponse(jwtToken);
+        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getEmail(), account.getType(), jwtToken);
     }
 
     public AuthResponse login(LoginRequest request){
@@ -40,9 +44,8 @@ public class AuthService {
                         request.getPassword()
                 )
         );
-        var account = repository.findByEmail(request.getEmail());
-
+        var account = accountService.findAccountByEmail(request.getEmail());
         String jwtToken = jwtService.generateToken(account);
-        return new AuthResponse(jwtToken);
+        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getLastName(), account.getType(), jwtToken);
     }
 }

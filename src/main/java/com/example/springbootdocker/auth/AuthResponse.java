@@ -1,6 +1,7 @@
 package com.example.springbootdocker.auth;
 
 
+import com.example.springbootdocker.entitys.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,5 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthResponse {
+    private String firstName;
+    private String lastName;
+    private String email;
+    private UserType userType;
     private String token;
 }

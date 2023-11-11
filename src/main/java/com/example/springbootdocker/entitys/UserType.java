@@ -1,7 +1,7 @@
 package com.example.springbootdocker.entitys;
 
-public enum Role {
+public enum UserType {
     DOCTOR,
     PATIENT,
-    STAFF
+    EMPLOYEE
 }
