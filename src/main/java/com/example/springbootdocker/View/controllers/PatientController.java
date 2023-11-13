@@ -22,9 +22,9 @@ public class PatientController {
 
     @GetMapping("/patient")
     public PatientVm getPatient(@RequestParam Integer id){
-        Optional patient = patientService.getPatient(id);
-        if (patient.isPresent()){
-            return (PatientVm) patient.get();
+        PatientVm patient = patientService.getPatient(id);
+        if (patient != null){
+            return patient;
         }
        throw new RuntimeException("No patient with the id "+id);
     }

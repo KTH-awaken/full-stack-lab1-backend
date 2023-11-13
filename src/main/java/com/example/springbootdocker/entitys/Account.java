@@ -1,8 +1,9 @@
 package com.example.springbootdocker.entitys;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -10,14 +11,15 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-//@Builder
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "account")
 public class Account implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    int id;
 
+
+    @Id
     @Column(unique = true)
     private String email;
     private String firstName;
@@ -26,7 +28,7 @@ public class Account implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
-    private int age;
+
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private List<Message> receivedMessages;
@@ -34,27 +36,13 @@ public class Account implements UserDetails {
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private List<Message> sentMessages;
 
-    public Account(String email, String firstName, String lastName, int age, UserType userType, String password,List<Message>receivedMessages, List<Message> sentMessages) {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.userType = userType;
-        this.password = password;
-        this.receivedMessages = receivedMessages;
-        this.sentMessages = sentMessages;
-    }
-
-
-    public Account() {
-
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority("ROLE_"+userType.name()));
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -83,74 +71,4 @@ public class Account implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<Message> getReceivedMessages() {
-        return receivedMessages;
-    }
-
-    public void setReceivedMessages(List<Message> receivedMessages) {
-        this.receivedMessages = receivedMessages;
-    }
-
-    public List<Message> getSentMessages() {
-        return sentMessages;
-    }
-
-    public void setSentMessages(List<Message> sentMessages) {
-        this.sentMessages = sentMessages;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
 }

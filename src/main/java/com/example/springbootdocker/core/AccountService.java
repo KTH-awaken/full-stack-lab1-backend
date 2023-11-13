@@ -4,51 +4,39 @@ import com.example.springbootdocker.View.ViewModels.*;
 import com.example.springbootdocker.entitys.Account;
 import com.example.springbootdocker.entitys.Message;
 import com.example.springbootdocker.entitys.UserType;
+import com.example.springbootdocker.mapper.AccountMapper;
 import com.example.springbootdocker.repos.IAccountRepo;
 import com.example.springbootdocker.repos.IMessageRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class AccountService {
-    private IAccountRepo accountRepo;
-    private IMessageRepo messageRepo;
-    private PatientService patientService;
-    private DoctorService doctorService;
-    private EmployeeService employeeService;
+    private final IAccountRepo accountRepo;
+    private final IMessageRepo messageRepo;
+    private final PatientService patientService;
+    private final DoctorService doctorService;
+    private final EmployeeService employeeService;
+    private final AccountMapper accountMapper;
 
-
-    public AccountService(IAccountRepo accountRepo, IMessageRepo messageRepo, PatientService patientService,DoctorService doctorService,EmployeeService employeeService) {
-        this.accountRepo = accountRepo;
-        this.messageRepo = messageRepo;
-        this.patientService = patientService;
-        this.doctorService = doctorService;
-        this.employeeService =employeeService;
-    }
 
     public AccountVm getAccount(Integer id){
         java.util.Optional<Account> account = accountRepo.findById(id);
         if (account.isPresent()){
-            AccountVm accountVm = new AccountVm(account.get().getId(),account.get().getEmail(),account.get().getReceivedMessages(), account.get().getSentMessages(),account.get().getFirstName(),account.get().getLastName(),account.get().getAge());
-            return accountVm;
+            return  accountMapper.toAccountVM(account.get());
         }
         throw new RuntimeException("couldn't find account with id: "+id);
     }
 
     public List<AccountVm> getAllAccounts(){
-        List<Account> allAccounts = accountRepo.findAll();
-        List<AccountVm> accountVmList = new ArrayList<>();
-
-        for (Account account : allAccounts) {
-            AccountVm accountVm = ConverterUtil.convertFromAccountToAccountVm(account);
-            accountVmList.add(accountVm);
-        }
-        return accountVmList;
+        return accountMapper.toAccountVMs(accountRepo.findAll());
     }
 
     public AccountVm findAccountByEmail(String email){
-        return ConverterUtil.convertFromAccountToAccountVm(accountRepo.findByEmail(email));
+        return accountMapper.toAccountVM(accountRepo.findByEmail(email));
     }
 
     public MessageVm sendMessage(MessageVm messageVm){
@@ -58,7 +46,7 @@ public class AccountService {
     }
 
     public AccountVm createAccount(AccountVm accountVm){
-        UserType userType = accountVm.getType();
+        UserType userType = accountVm.getUserType();
         System.out.println("type  in create acount= " + userType);
         switch (userType){
             case PATIENT: patientService.createPatient(new PatientVm(accountVm));break;

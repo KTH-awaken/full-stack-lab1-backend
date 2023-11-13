@@ -21,8 +21,9 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     public EmployeeVm getEmployee(@RequestParam Integer id){
-        Optional employee = employeeService.getEmployee(id);
-        if (employee.isPresent())return (EmployeeVm) employee.get();
+        EmployeeVm  employee = employeeService.getEmployee(id);
+        if (employee != null)
+            return employee;
 
         throw new RuntimeException("No Employee with id: "+id);
     }

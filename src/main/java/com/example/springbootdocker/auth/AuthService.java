@@ -29,12 +29,12 @@ public class AuthService {
         account.setLastName(request.getLastName());
         account.setEmail(request.getEmail());
         account.setPassword(passwordEncoder.encode(request.getPassword()));
-        account.setType(request.getUserType());
+        account.setUserType(request.getUserType());
         accountService.createAccount(account);
 
 
         String jwtToken = jwtService.generateToken(account);
-        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getEmail(), account.getType(), jwtToken);
+        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getEmail(), account.getUserType(), jwtToken);
     }
 
     public AuthResponse login(LoginRequest request){
@@ -46,6 +46,6 @@ public class AuthService {
         );
         var account = accountService.findAccountByEmail(request.getEmail());
         String jwtToken = jwtService.generateToken(account);
-        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getLastName(), account.getType(), jwtToken);
+        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getLastName(), account.getUserType(), jwtToken);
     }
 }

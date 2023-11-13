@@ -8,19 +8,27 @@ public class PatientVm {
     private int id;
 
     private String mCondition;
-    private AccountVm accountVm;
+    private AccountVm account;
 
     public PatientVm( int id, String mCondition,AccountVm accountVm) {
         this.id = id;
         this.mCondition = mCondition;
-        this.accountVm = accountVm;
+        this.account = accountVm;
     }
     public PatientVm(AccountVm accountVm) {
         this.mCondition = "Default";
-        this.accountVm = accountVm;
+        this.account = accountVm;
     }
     public PatientVm() {
 
+    }
+
+    public AccountVm getAccount() {
+        return account;
+    }
+
+    public void setAccount(AccountVm account) {
+        this.account = account;
     }
 
     public void setId(int id) {
@@ -41,13 +49,7 @@ public class PatientVm {
     }
 
 
-    public AccountVm getAccountVm() {
-        return accountVm;
-    }
 
-    public void setAccountVm(AccountVm accountVm) {
-        this.accountVm = accountVm;
-    }
 
     @Override
     public String toString() {

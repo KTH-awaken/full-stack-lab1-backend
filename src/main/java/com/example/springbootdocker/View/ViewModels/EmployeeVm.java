@@ -1,15 +1,17 @@
 package com.example.springbootdocker.View.ViewModels;
 
+
+
 public class EmployeeVm {
     private int id;
-    private AccountVm accountVm;
+    private AccountVm account;
 
     public EmployeeVm(int id, AccountVm accountVm) {
         this.id = id;
-        this.accountVm = accountVm;
+        this.account = accountVm;
     }
     public EmployeeVm(AccountVm accountVm) {
-        this.accountVm = accountVm;
+        this.account = accountVm;
     }
 
     public EmployeeVm() {
@@ -23,11 +25,11 @@ public class EmployeeVm {
         this.id = id;
     }
 
-    public AccountVm getAccountVm() {
-        return accountVm;
+    public AccountVm getAccount() {
+        return account;
     }
 
-    public void setAccountVm(AccountVm accountVm) {
-        this.accountVm = accountVm;
+    public void setAccount(AccountVm account) {
+        this.account = account;
     }
 }

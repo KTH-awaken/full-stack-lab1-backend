@@ -10,7 +10,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface IMapper {
+public interface EncounterMapper {
     ObservationVm toObservationVM (Observation observation);
     List<ObservationVm> toObservationVMs(List<Observation> observations);
 

@@ -16,6 +16,8 @@ public class Patient {
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
+
+
     public Patient( String mCondition,Account account) {
         this.mCondition = mCondition;
         this.account = account;
@@ -55,8 +57,8 @@ public class Patient {
     public String toString() {
         return "Patient{" +
                 "id=" + id +
-
                 ", mCondition='" + mCondition + '\'' +
+                ", account=" + account +
                 '}';
     }
 }

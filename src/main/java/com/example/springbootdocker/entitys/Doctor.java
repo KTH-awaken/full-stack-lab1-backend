@@ -12,6 +12,7 @@ public class Doctor {
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
+
     public Doctor(Account account) {
         this.account = account;
     }
