@@ -19,7 +19,7 @@ public class ObservationService {
         Optional<Observation> observation = observationRepo.findById(id);
 
         if(observation.isPresent()){
-            ObservationVm observationVm = new ObservationVm(observation.get().getId(),observation.get().getDescription(),observation.get().getDate(),observation.get().getPatient());
+            ObservationVm observationVm = new ObservationVm();
             return Optional.of(observationVm);
         }
         return Optional.empty();

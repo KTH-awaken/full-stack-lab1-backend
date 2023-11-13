@@ -66,10 +66,10 @@ public class ConverterUtil {
     }
     //Observation
     public static Observation convertFromObservationVmToObservation(ObservationVm observationVm) {
-        return new Observation(observationVm.getDescription(),observationVm.getPatient());
+        return new Observation();
     }
     public static ObservationVm convertFromObservationToObservationVm(Observation observation) {
-        return new ObservationVm(observation.getId(),observation.getDescription(),observation.getDate(),observation.getPatient());
+        return new ObservationVm();
     }
     public static List<ObservationVm> convertFromObservationToObservationVmList(List<Observation> observations){
         List<ObservationVm> observationVms = new ArrayList<>();
@@ -94,7 +94,7 @@ public class ConverterUtil {
         return encounters;
     }
     public static Encounter convertFromEncounterVmToEncounter(EncounterVm encounterVm) {
-        return new Encounter(encounterVm.getWorkerId(),encounterVm.getPatientId(),convertFromObservationVmToObservationList(encounterVm.getObservationVms()));
+        return new Encounter(encounterVm.getWorkerId(),encounterVm.getPatientId(),convertFromObservationVmToObservationList(encounterVm.getObservations()));
     }
 
 

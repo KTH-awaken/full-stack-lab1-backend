@@ -3,12 +3,12 @@ package com.example.springbootdocker.View.controllers;
 import com.example.springbootdocker.View.ViewModels.EncounterVm;
 import com.example.springbootdocker.View.ViewModels.ObservationVm;
 import com.example.springbootdocker.core.EncounterService;
+import com.example.springbootdocker.entitys.Encounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class EncounterController {
@@ -30,6 +30,11 @@ public class EncounterController {
     @ResponseStatus(HttpStatus.CREATED)
     public void addObservation(@RequestBody ObservationVm observationVm,int encounterId){
 
+    }
+
+    @GetMapping("/encounter")
+    public List<EncounterVm> getEncounter(){
+        return   this.encounterService.getEncounter();
 
     }
 }

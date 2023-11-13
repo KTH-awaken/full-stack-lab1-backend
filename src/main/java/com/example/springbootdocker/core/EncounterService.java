@@ -2,31 +2,51 @@ package com.example.springbootdocker.core;
 
 import com.example.springbootdocker.View.ViewModels.EncounterVm;
 import com.example.springbootdocker.entitys.Encounter;
+import com.example.springbootdocker.repos.IAccountRepo;
 import com.example.springbootdocker.repos.IEncounterRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EncounterService {
-    private IEncounterRepo encounterRepo;
+    private final IEncounterRepo encounterRepo;
+    private final IAccountRepo accountRepo;
 
-    public EncounterService(IEncounterRepo encounterRepo) {
-        this.encounterRepo = encounterRepo;
-    }
 
-    public Optional getEncounter(Integer id){
-        Optional<Encounter> encounter = encounterRepo.findById(id);
+    public List<EncounterVm> getEncounter(){
+        List<Encounter> encounters = encounterRepo.findAll();
 
-        if(encounter.isPresent()){
-            EncounterVm encounterVm = new EncounterVm(encounter.get().getId(),encounter.get().getWorkerId(),encounter.get().getPatientId(),encounter.get().getDate(), ConverterUtil.convertFromObservationToObservationVmList(encounter.get().getObservations()));
-            return Optional.of(encounterVm);
+        List<EncounterVm> vms = new ArrayList<>();
+
+        for(Encounter enc:encounters){
+            EncounterVm vm = EncounterVm.builder()
+                    .title(enc.getTitle())
+                    .description(enc.getDescription())
+                    .workerName(accountRepo.getReferenceById(enc.getWorkerId()).getLastName())
+                    .workerId(enc.getWorkerId())
+                    .patientId(enc.getPatientId())
+                    .build();
         }
-        return Optional.empty();
+        System.out.println(encounters);
+
+        return null;
     }
 
     public void createEncounter(EncounterVm encounterVm){
-        Encounter encounter = ConverterUtil.convertFromEncounterVmToEncounter(encounterVm);
+
+        Encounter encounter = Encounter.builder()
+                .title(encounterVm.getTitle())
+                .description(encounterVm.getDescription())
+                .date(encounterVm.getDate())
+                .observations(new ArrayList<>())
+                .workerId(encounterVm.getWorkerId())
+                .patientId(encounterVm.getPatientId())
+                .build();
         encounterRepo.save(encounter);
     }
 }

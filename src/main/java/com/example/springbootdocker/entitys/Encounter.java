@@ -1,6 +1,9 @@
 package com.example.springbootdocker.entitys;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -9,6 +12,10 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Builder
+@Table(name = "encounter")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Encounter {
 
     @Id
@@ -17,8 +24,12 @@ public class Encounter {
     private int workerId;
     private int patientId;
     private Date date;
+    private String title;
+    private String description;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+
+
+    @OneToMany(mappedBy = "encounter", cascade = CascadeType.ALL)
     private List<Observation> observations;
 
     public Encounter(int workerId, int patientId,  List<Observation> observations) {
@@ -28,8 +39,22 @@ public class Encounter {
         this.observations = observations;
     }
 
-    public Encounter() {
 
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {
