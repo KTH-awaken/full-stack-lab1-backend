@@ -65,37 +65,37 @@ public class ConverterUtil {
         return new EmployeeVm(convertFromAccountToAccountVm(employee.getAccount()));
     }
     //Observation
-    public static Observation convertFromObservationVmToObservation(ObservationVm observationVm) {
-        return new Observation();
-    }
-    public static ObservationVm convertFromObservationToObservationVm(Observation observation) {
-        return new ObservationVm();
-    }
-    public static List<ObservationVm> convertFromObservationToObservationVmList(List<Observation> observations){
-        List<ObservationVm> observationVms = new ArrayList<>();
-        for (Observation o:observations) {
-            observationVms.add(convertFromObservationToObservationVm(o));
-        }
-        return observationVms;
-    }
-    public static List<Observation> convertFromObservationVmToObservationList(List<ObservationVm> observationVms){
-        List<Observation> observations = new ArrayList<>();
-        for (ObservationVm ovm : observationVms) {
-            observations.add(convertFromObservationVmToObservation(ovm));
-        }
-        return observations;
-    }
-    //Encounter
-    public static List<Encounter> convertFromEncounterVmToEncounterList(List<EncounterVm> encounterVms){
-        List<Encounter> encounters = new ArrayList<>();
-        for (EncounterVm evm : encounterVms) {
-            encounters.add(convertFromEncounterVmToEncounter(evm));
-        }
-        return encounters;
-    }
-    public static Encounter convertFromEncounterVmToEncounter(EncounterVm encounterVm) {
-        return new Encounter();
-    }
+//    public static Observation convertFromObservationVmToObservation(ObservationVm observationVm) {
+//        return new Observation();
+//    }
+//    public static ObservationVm convertFromObservationToObservationVm(Observation observation) {
+//        return new ObservationVm();
+//    }
+//    public static List<ObservationVm> convertFromObservationToObservationVmList(List<Observation> observations){
+//        List<ObservationVm> observationVms = new ArrayList<>();
+//        for (Observation o:observations) {
+//            observationVms.add(convertFromObservationToObservationVm(o));
+//        }
+//        return observationVms;
+//    }
+//    public static List<Observation> convertFromObservationVmToObservationList(List<ObservationVm> observationVms){
+//        List<Observation> observations = new ArrayList<>();
+//        for (ObservationVm ovm : observationVms) {
+//            observations.add(convertFromObservationVmToObservation(ovm));
+//        }
+//        return observations;
+//    }
+//    //Encounter
+//    public static List<Encounter> convertFromEncounterVmToEncounterList(List<EncounterVm> encounterVms){
+//        List<Encounter> encounters = new ArrayList<>();
+//        for (EncounterVm evm : encounterVms) {
+//            encounters.add(convertFromEncounterVmToEncounter(evm));
+//        }
+//        return encounters;
+//    }
+//    public static Encounter convertFromEncounterVmToEncounter(EncounterVm encounterVm) {
+//        return new Encounter();
+//    }
 
 
 }
