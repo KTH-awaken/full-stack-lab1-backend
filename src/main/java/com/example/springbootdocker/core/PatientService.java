@@ -45,6 +45,11 @@ public class PatientService {
         return patientVm;
     }
 
+    public PatientVm getPatientById(int id){
+        Patient patient = this.patientRepo.getReferenceById(id);
+        return ConverterUtil.convertFromPatientToPatientVM(patient);
+    }
+
 
 
 

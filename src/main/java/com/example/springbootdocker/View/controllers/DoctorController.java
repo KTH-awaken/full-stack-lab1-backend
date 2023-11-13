@@ -29,10 +29,8 @@ public class DoctorController {
 
     @GetMapping("/doctors")
     public List<DoctorVm> getDoctors(){
-        System.out.println("get doctors called");
         List<DoctorVm> allDoctors = doctorService.getAllDoctors();
         if (!allDoctors.isEmpty()){
-            System.out.println("allDoctors = " + allDoctors);
             return allDoctors;
         }
         throw new RuntimeException("No doctors found in db");

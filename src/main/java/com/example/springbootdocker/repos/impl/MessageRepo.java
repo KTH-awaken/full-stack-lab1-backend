@@ -162,4 +162,15 @@ public class MessageRepo implements IMessageRepo {
     public Page<Message> findAll(Pageable pageable) {
         return null;
     }
+
+    @Override
+    public List<Message> findBySenderOrReceiverOrderByDateDesc(Integer sender, Integer receiver) {
+        return null;
+    }
+
+    @Override
+    public List<Message> findBySenderAndReceiverOrderByDateDesc(Integer myAccountId, Integer participantId) {
+        return null;
+    }
+
 }

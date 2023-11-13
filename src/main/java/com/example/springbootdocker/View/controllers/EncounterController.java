@@ -37,4 +37,11 @@ public class EncounterController {
         return   this.encounterService.getEncounter();
 
     }
+
+
+    @GetMapping("/encounter/{patientId}")
+    public List<EncounterVm> getEncounter(@PathVariable int patientId){
+        return   this.encounterService.getPatientEncounters(patientId);
+
+    }
 }

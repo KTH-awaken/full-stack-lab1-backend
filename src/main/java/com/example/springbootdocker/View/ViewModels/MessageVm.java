@@ -10,7 +10,6 @@ public class MessageVm {
     int id;
     private String text;
     private Date date;
-
     private int senderId;
     private int receiverId;
 
@@ -70,5 +69,16 @@ public class MessageVm {
 
     public void setReceiver(int receiverId) {
         this.receiverId = receiverId;
+    }
+
+    @Override
+    public String toString() {
+        return "MessageVm{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", date=" + date +
+                ", senderId=" + senderId +
+                ", receiverId=" + receiverId +
+                '}';
     }
 }

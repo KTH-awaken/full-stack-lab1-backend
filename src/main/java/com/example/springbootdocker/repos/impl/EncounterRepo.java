@@ -162,4 +162,9 @@ public class EncounterRepo implements IEncounterRepo {
     public Page<Encounter> findAll(Pageable pageable) {
         return null;
     }
+
+    @Override
+    public List<Encounter> findByPatientId(int id) {
+        return null;
+    }
 }

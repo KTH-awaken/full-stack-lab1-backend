@@ -32,11 +32,18 @@ public class PatientController {
     @GetMapping("/patients")
     public List<PatientVm> getPatients(){
         List<PatientVm> allPatients = patientService.getAllPatients();
-        if (!allPatients.isEmpty()){
-            return allPatients;
-        }
-        throw new RuntimeException("No patients in db");
+        return allPatients;
+//        if (!allPatients.isEmpty()){
+//            return allPatients;
+//        }
+//        throw new RuntimeException("No patients in db");
     }
+
+    @GetMapping("/patients/{patientId}")
+    public PatientVm getPatient(@PathVariable int patientId){
+        return patientService.getPatientById(patientId);
+    }
+
 
 
     @PostMapping("/patient")

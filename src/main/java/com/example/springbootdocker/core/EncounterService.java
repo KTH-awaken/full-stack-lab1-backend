@@ -33,4 +33,13 @@ public class EncounterService {
         Encounter encounter = mapper.toEncounter(encounterVm);
         encounterRepo.save(encounter);
     }
+
+    public List<EncounterVm> getPatientEncounters(int id){
+        List<Encounter> encounters = encounterRepo.findByPatientId(id);
+        List<EncounterVm> vms = mapper.toEncounterVMs(encounters);
+        for(EncounterVm vm:vms){
+            vm.setWorkerName("hamada");
+        }
+        return vms;
+    }
 }

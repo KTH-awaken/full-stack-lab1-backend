@@ -26,7 +26,7 @@ public class ObservationService {
     }
 
     public void createObservation(ObservationVm observationVm){
-        Observation observation = ConverterUtil.convertFromObservationVmToObservation(observationVm);
-        observationRepo.save(observation);
+//        Observation observation = ConverterUtil.convertFromObservationVmToObservation(observationVm);
+//        observationRepo.save(observation);
     }
 }
