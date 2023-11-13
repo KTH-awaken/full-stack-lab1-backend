@@ -60,6 +60,13 @@ public class ConverterUtil {
     public static Employee convertFromEmployeeVmToEmployee(EmployeeVm employeeVm) {
         return new Employee(convertFromAccountVmToAccount(employeeVm.getAccountVm()));
     }
+    public static List<MessageVm> convertFromMessageToMessageVmList(List<Message> messages){
+        List<MessageVm> list = new ArrayList<>();
+        for (Message m:messages) {
+            list.add(convertFromMessageToMessageVm(m));
+        }
+        return list;
+    }
 
     public static EmployeeVm convertFromEmployeeToEmployeeVm(Employee employee) {
         return new EmployeeVm(convertFromAccountToAccountVm(employee.getAccount()));

@@ -8,9 +8,7 @@ import com.example.springbootdocker.repos.IAccountRepo;
 import com.example.springbootdocker.repos.IMessageRepo;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AccountService {
@@ -94,5 +92,49 @@ public class AccountService {
         return messageVmList;
     }
 
+public List<ChatVm> getChats(Integer id) {
+    List<Message> messages = messageRepo.findBySenderOrReceiverOrderByDateDesc(id, id);
 
+    Map<Integer, Message> latestMessages = new HashMap<>();
+    Map<Integer, String> participantNames = new HashMap<>();
+    List<ChatVm> chatVms = new ArrayList<>();
+
+    for (Message message : messages) {
+        int otherParticipantId = (message.getSender() == id) ? message.getReceiver() : message.getSender();
+
+        if (!participantNames.containsKey(otherParticipantId)) {
+            String otherParticipantName = getParticipantName(otherParticipantId);
+            participantNames.put(otherParticipantId, otherParticipantName);
+        }
+
+        if (!latestMessages.containsKey(otherParticipantId) || message.getDate().after(latestMessages.get(otherParticipantId).getDate())) {
+            latestMessages.put(otherParticipantId, message);
+        }
+    }
+
+    for (Map.Entry<Integer, Message> entry : latestMessages.entrySet()) {
+        int otherParticipantId = entry.getKey();
+        Message latestMessage = entry.getValue();
+        String otherParticipantName = participantNames.get(otherParticipantId);
+        String lastMessage = latestMessage.getText();
+        Date date = latestMessage.getDate();
+
+        ChatVm chatVm = new ChatVm(id,otherParticipantId, otherParticipantName, lastMessage, date);
+        chatVms.add(chatVm);
+    }
+
+    return chatVms;
+}
+    private String getParticipantName(Integer participantId) {
+        Optional<Account> participant = accountRepo.findById(participantId);
+        return participant.map(account -> account.getFirstName() + " " + account.getLastName()).orElse("Unknown");
+    }
+
+    public List<MessageVm> getChatByParticipantId(Integer myAccountId,Integer participantId) {
+        List<Message> messages = messageRepo.findBySenderAndReceiverOrderByDateDesc(myAccountId, participantId);
+        System.out.println("messages = " + messages);
+        List<MessageVm> messageVms = ConverterUtil.convertFromMessageToMessageVmList(messages);
+        System.out.println("messageVms = " + messageVms);
+        return messageVms;
+    }
 }
