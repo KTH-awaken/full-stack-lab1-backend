@@ -50,6 +50,13 @@ public class AccountVm {
     public AccountVm() {
     }
 
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 
     public int getId() {
         return id;

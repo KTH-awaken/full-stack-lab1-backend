@@ -13,8 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class ObservationVm {
-    private int id;
     private String description;
     private Date date;
-    private int patient;
 }

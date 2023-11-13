@@ -1,16 +1,15 @@
 package com.example.springbootdocker.View.ViewModels;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.springbootdocker.entitys.Observation;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,5 +21,5 @@ public class EncounterVm {
     private String title;
     private String description;
     private Date date;
-    private List<ObservationVm> observations;
+    private List<Observation> observations;
 }

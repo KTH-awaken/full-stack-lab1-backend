@@ -94,7 +94,7 @@ public class ConverterUtil {
         return encounters;
     }
     public static Encounter convertFromEncounterVmToEncounter(EncounterVm encounterVm) {
-        return new Encounter(encounterVm.getWorkerId(),encounterVm.getPatientId(),convertFromObservationVmToObservationList(encounterVm.getObservations()));
+        return new Encounter();
     }
 
 
