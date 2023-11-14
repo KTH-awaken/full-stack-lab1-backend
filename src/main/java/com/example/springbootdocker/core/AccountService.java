@@ -23,12 +23,9 @@ public class AccountService {
     private final AccountMapper accountMapper;
 
 
-    public AccountVm getAccount(Integer id){
-        java.util.Optional<Account> account = accountRepo.findById(id);
-        if (account.isPresent()){
-            return  accountMapper.toAccountVM(account.get());
-        }
-        throw new RuntimeException("couldn't find account with id: "+id);
+    public AccountVm getAccount(int id){
+        Account account = accountRepo.getReferenceById(id);
+        return accountMapper.toAccountVM(account);
     }
 
     public List<AccountVm> getAllAccounts(){
@@ -114,8 +111,9 @@ public List<ChatVm> getChats(Integer id) {
     return chatVms;
 }
     private String getParticipantName(Integer participantId) {
-        Optional<Account> participant = accountRepo.findById(participantId);
-        return participant.map(account -> account.getFirstName() + " " + account.getLastName()).orElse("Unknown");
+//        Account participant = accountRepo.getReferenceById(participantId);
+//        return participant.map(account -> account.getFirstName() + " " + account.getLastName()).orElse("Unknown");
+        return "";
     }
 
     public List<MessageVm> getChatByParticipantId(Integer myAccountId,Integer participantId) {

@@ -17,9 +17,11 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "account")
 public class Account implements UserDetails {
-
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+
     @Column(unique = true)
     private String email;
     private String firstName;

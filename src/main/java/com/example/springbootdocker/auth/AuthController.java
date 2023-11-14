@@ -23,4 +23,22 @@ public class AuthController {
         return ResponseEntity.ok(res);
     }
 
+    @GetMapping("/patient-test")
+    public String patientSecure(){
+        return "Hello from secure endpoint for patient";
+    }
+
+
+
+
+    @GetMapping("/doctor-test")
+    public String doctorSecure(){
+        return "Hello from secure endpoint for doctor";
+    }
+
+    @GetMapping("/doctor-patient-test")
+    public String doctorPatientSecure(){
+        return "Hello from secure endpoint for doctor and patient";
+    }
+
 }

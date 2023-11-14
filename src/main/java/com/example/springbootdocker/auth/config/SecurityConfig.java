@@ -4,6 +4,7 @@ package com.example.springbootdocker.auth.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,10 +30,12 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("").permitAll()
-//                        .requestMatchers("doctor/**").hasAnyRole(Role.DOCTOR.name())
-//                        .requestMatchers("patient/**").hasAnyRole(Role.PATIENT.name(),Role.DOCTOR.name())
-                        .anyRequest().permitAll()
+                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()  // Allow OPTIONS requests
+                                .requestMatchers("auth/**").permitAll()
+//                        .requestMatchers("api/v1/**").hasAnyRole(Role.DOCTOR.name(), Role.PATIENT.name(), Role.STAFF.name())
+//                        .requestMatchers("api/v1/conditions/**").hasAnyRole(Role.DOCTOR.name(), Role.PATIENT.name())
+                                .anyRequest().authenticated()
+
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

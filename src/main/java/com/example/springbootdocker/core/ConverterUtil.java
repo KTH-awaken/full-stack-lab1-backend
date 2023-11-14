@@ -13,6 +13,7 @@ public class ConverterUtil {
     //Account
     public static Account convertFromAccountVmToAccount(AccountVm accountVm){
         return new Account(
+                accountVm.getId(),
                 accountVm.getEmail(),
                 accountVm.getFirstName(),
                 accountVm.getLastName(),
@@ -24,7 +25,7 @@ public class ConverterUtil {
 
     }
     public static AccountVm convertFromAccountToAccountVm(Account account){
-        return new AccountVm(account.getEmail(),account.getFirstName(), account.getLastName() ,account.getPassword(),account.getUserType(),account.getReceivedMessages(),account.getSentMessages());
+        return new AccountVm(account.getId(),account.getEmail(),account.getFirstName(), account.getLastName() ,account.getPassword(),account.getUserType(),account.getReceivedMessages(),account.getSentMessages());
     }
     //Patient
     public static PatientVm convertFromPatientToPatientVM(Patient patient){
