@@ -135,6 +135,7 @@ public List<ChatVm> getChats(Integer id) {
         System.out.println("messages = " + messages);
         List<MessageVm> messageVms = ConverterUtil.convertFromMessageToMessageVmList(messages);
         System.out.println("messageVms = " + messageVms);
+        Collections.reverse(messageVms);
         return messageVms;
     }
 }
