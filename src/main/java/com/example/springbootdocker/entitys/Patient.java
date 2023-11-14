@@ -1,11 +1,14 @@
 package com.example.springbootdocker.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "patient")
 public class Patient {
     @Id
@@ -17,6 +20,10 @@ public class Patient {
     private Account account;
 
 
+    @OneToMany(mappedBy = "patient")
+    private List<Encounter> encounters;
+    @OneToMany(mappedBy = "patient")
+    private List<Condition> conditions;
 
     public Patient( String mCondition,Account account) {
         this.mCondition = mCondition;
@@ -25,6 +32,22 @@ public class Patient {
 
     public Patient() {
 
+    }
+
+    public List<Encounter> getEncounters() {
+        return encounters;
+    }
+
+    public void setEncounters(List<Encounter> encounters) {
+        this.encounters = encounters;
+    }
+
+    public List<Condition> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<Condition> conditions) {
+        this.conditions = conditions;
     }
 
     public void setId(int id) {

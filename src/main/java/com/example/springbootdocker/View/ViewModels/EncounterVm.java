@@ -4,7 +4,6 @@ import com.example.springbootdocker.entitys.Observation;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 
@@ -15,11 +14,10 @@ import java.util.List;
 @NoArgsConstructor
 public class EncounterVm {
     private int id;
-    private int workerId;
-    private int patientId;
-    private String workerName;
+    private FieldUserVm patient;
+    private FieldUserVm doctor;
     private String title;
     private String description;
-    private Date date;
-    private List<Observation> observations;
+    private LocalDateTime date;
+    private List<ObservationVm> observations;
 }

@@ -1,8 +1,13 @@
 package com.example.springbootdocker.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "doctor")
 public class Doctor {
     @Id
@@ -12,12 +17,33 @@ public class Doctor {
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
+    @OneToMany(mappedBy = "doctor")
+    private List<Condition> conditions;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<Encounter> encounters;
 
     public Doctor(Account account) {
         this.account = account;
     }
 
     public Doctor() {
+    }
+
+    public List<Encounter> getEncounters() {
+        return encounters;
+    }
+
+    public void setEncounters(List<Encounter> encounters) {
+        this.encounters = encounters;
+    }
+
+    public List<Condition> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<Condition> conditions) {
+        this.conditions = conditions;
     }
 
     public int getId() {

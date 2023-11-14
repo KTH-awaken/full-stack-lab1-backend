@@ -1,11 +1,11 @@
 package com.example.springbootdocker.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -15,6 +15,8 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "observation")
 public class Observation {
 
@@ -22,7 +24,7 @@ public class Observation {
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private int id;
      private String description;
-     private Date date;
+     private LocalDateTime date;
 
      @ManyToOne
      @JoinColumn(name = "encounter_id")

@@ -1,5 +1,6 @@
 package com.example.springbootdocker.repos.impl;
 
+import com.example.springbootdocker.entitys.Doctor;
 import com.example.springbootdocker.entitys.Patient;
 import com.example.springbootdocker.repos.IPatientRepo;
 import org.springframework.data.domain.Example;
@@ -16,6 +17,11 @@ public class PatientRepo implements IPatientRepo {
 
     @Override
     public List<Patient> findPatientsBymCondition(String mCondition) {
+        return null;
+    }
+
+    @Override
+    public Doctor findPatientByAccountEmail(String email) {
         return null;
     }
 

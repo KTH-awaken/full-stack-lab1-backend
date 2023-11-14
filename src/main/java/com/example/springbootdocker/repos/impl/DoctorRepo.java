@@ -162,4 +162,13 @@ public class DoctorRepo implements IDoctorRepo {
     public Page<Doctor> findAll(Pageable pageable) {
         return null;
     }
+
+
+
+
+
+    @Override
+    public Doctor findByAccountEmail(String email) {
+        return null;
+    }
 }
