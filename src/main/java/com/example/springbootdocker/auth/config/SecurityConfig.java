@@ -34,7 +34,7 @@ public class SecurityConfig {
                                 .requestMatchers("auth/**").permitAll()
 //                        .requestMatchers("api/v1/**").hasAnyRole(Role.DOCTOR.name(), Role.PATIENT.name(), Role.STAFF.name())
 //                        .requestMatchers("api/v1/conditions/**").hasAnyRole(Role.DOCTOR.name(), Role.PATIENT.name())
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
 
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
