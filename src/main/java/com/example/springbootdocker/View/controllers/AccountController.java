@@ -57,14 +57,12 @@ public class AccountController {
 
     @GetMapping("/messages")
     public List<MessageVm> getMessages(){
+        System.out.println("getmessegs called");
         List<MessageVm> messageVms = accountService.getAllMessages();
         if (!messageVms.isEmpty()){
             return messageVms;
         }
-//        throw new RuntimeException("no messages found");
-        messageVms.add(new MessageVm("hardcoded return messeg in getmesseges from backend ",1,2));
-        System.out.println("getmessegs called");
-        return messageVms;
+        throw new RuntimeException("no messages found");
     }
 
     @GetMapping("/chats")
@@ -78,8 +76,10 @@ public class AccountController {
 
     @PostMapping("/chat/{myId}/{participantId}")
     public List<MessageVm> getChatByParticipantId(@PathVariable Integer myId, @PathVariable Integer participantId){
+        System.out.println("in getChatby paricipanid");
         List<MessageVm> messageVms = accountService.getChatByParticipantId(myId,participantId);
         if(!messageVms.isEmpty()){
+            System.out.println("messageVms = " + messageVms);
             return messageVms;
         }
         throw new RuntimeException("no chats with participantId : "+participantId);
