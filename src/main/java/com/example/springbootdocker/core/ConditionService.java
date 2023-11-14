@@ -9,8 +9,6 @@ import com.example.springbootdocker.mapper.ConditionMapper;
 import com.example.springbootdocker.repos.IConditionRepo;
 import com.example.springbootdocker.repos.IDoctorRepo;
 import com.example.springbootdocker.repos.IPatientRepo;
-import com.example.springbootdocker.repos.impl.DoctorRepo;
-import com.example.springbootdocker.repos.impl.PatientRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +31,13 @@ public class ConditionService {
 
     public ConditionVm createCondition(CreateConditionRequest request){
         Doctor doctor = doctorRepo.findByAccountEmail(request.getDoctorEmail());
+        System.out.println("-------------------------------------");
+        System.out.println("-------------------------------------");
+        System.out.println(request.getDoctorEmail());
+        System.out.println(doctor);
+        System.out.println("-------------------------------------");
+        System.out.println("-------------------------------------");
+
         Patient patient = patientRepo.getReferenceById(request.getPatientId());
         LocalDateTime timestamp = LocalDateTime.now();
 

@@ -4,6 +4,7 @@ import com.example.springbootdocker.View.ViewModels.ConditionVm;
 import com.example.springbootdocker.View.requests.CreateConditionRequest;
 import com.example.springbootdocker.core.ConditionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,12 +16,12 @@ public class ConditionController {
 
 
     @GetMapping("/condition/{patientId}")
-    public List<ConditionVm> getPatientCondition(@PathVariable int patientId){
-        return this.conditionService.getPatientConditions(patientId);
+    public ResponseEntity<List<ConditionVm>> getPatientCondition(@PathVariable int patientId){
+        return ResponseEntity.ok(conditionService.getPatientConditions(patientId));
     }
 
     @PostMapping("/condition")
-    public ConditionVm createPatientCondition(@RequestBody CreateConditionRequest request){
-        return this.conditionService.createCondition(request);
+    public ResponseEntity<ConditionVm> createPatientCondition(@RequestBody CreateConditionRequest request){
+        return ResponseEntity.ok(conditionService.createCondition(request));
     }
 }

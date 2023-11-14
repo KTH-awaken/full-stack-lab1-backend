@@ -45,6 +45,6 @@ public class AuthService {
         );
         var account = accountService.findAccountByEmail(request.getEmail());
         String jwtToken = jwtService.generateToken(account);
-        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getLastName(), account.getUserType(), jwtToken);
+        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getEmail(), account.getUserType(), jwtToken);
     }
 }

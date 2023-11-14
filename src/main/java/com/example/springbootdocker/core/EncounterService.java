@@ -13,9 +13,7 @@ import com.example.springbootdocker.repos.IDoctorRepo;
 import com.example.springbootdocker.repos.IEncounterRepo;
 import com.example.springbootdocker.repos.IObservationRepo;
 import com.example.springbootdocker.repos.IPatientRepo;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

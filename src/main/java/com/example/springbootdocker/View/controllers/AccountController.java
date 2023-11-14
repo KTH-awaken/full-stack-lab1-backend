@@ -5,6 +5,7 @@ import com.example.springbootdocker.View.ViewModels.MessageVm;
 import com.example.springbootdocker.core.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,25 +21,25 @@ public class AccountController {
     }
 
     @GetMapping("/account")
-    public AccountVm getAccount(@RequestParam Integer id){
+    public ResponseEntity<AccountVm> getAccount(@RequestParam Integer id){
         AccountVm accountVm = accountService.getAccount(id);
-        return accountVm;
+        return ResponseEntity.ok(accountVm);
     }
 
     @GetMapping("/accounts")
-    public List<AccountVm> getAccounts(){
+    public ResponseEntity<List<AccountVm>> getAccounts(){
         List<AccountVm> accountVms = accountService.getAllAccounts();
         if(!accountVms.isEmpty()){
-            return accountVms;
+            return ResponseEntity.ok(accountVms);
         }
         throw new RuntimeException("No accounts in db");
     }
 
     @PostMapping("/account")
     @ResponseStatus(HttpStatus.CREATED)
-    public AccountVm createAccount(@RequestBody AccountVm accountVm){
+    public ResponseEntity<AccountVm> createAccount(@RequestBody AccountVm accountVm){
         System.out.println("accountVm = " + accountVm.toString());
-        return accountService.createAccount(accountVm);
+        return ResponseEntity.ok(accountService.createAccount(accountVm));
     }
 
     @PostMapping("/message")
