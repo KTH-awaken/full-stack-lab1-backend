@@ -1,24 +1,31 @@
 package com.example.springbootdocker.View.controllers;
-import com.example.springbootdocker.View.ViewModels.AccountVm;
-import com.example.springbootdocker.View.ViewModels.ChatVm;
-import com.example.springbootdocker.View.ViewModels.MessageVm;
+import com.example.springbootdocker.View.ViewModels.*;
 import com.example.springbootdocker.core.AccountService;
+import com.example.springbootdocker.core.DoctorService;
+import com.example.springbootdocker.core.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class AccountController {
 
     private AccountService accountService;
+    private DoctorService doctorService;
+    private EmployeeService employeeService;
 
     @Autowired
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService, DoctorService doctorService, EmployeeService employeeService) {
         this.accountService = accountService;
+        this.doctorService = doctorService;
+        this.employeeService = employeeService;
     }
+
+
 
     @GetMapping("/account")
     public ResponseEntity<AccountVm> getAccount(@RequestParam Integer id){
@@ -85,6 +92,19 @@ public class AccountController {
             return messageVms;
         }
         throw new RuntimeException("no chats with participantId : "+participantId);
-
     }
+
+    @GetMapping("/workers")
+    public List<AccountVm> getWorkers(){
+        List<AccountVm> workers = new ArrayList<>();
+        for (DoctorVm d :doctorService.getAllDoctors()) {
+            workers.add(d.getAccount());
+        }
+        for (EmployeeVm e :employeeService.getAllEmployees()) {
+            workers.add(e.getAccount());
+        }
+        System.out.println("workers called");
+        return workers;
+    }
+
 }
