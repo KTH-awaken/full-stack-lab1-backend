@@ -20,8 +20,6 @@ public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-
     @Column(unique = true)
     private String email;
     private String firstName;
@@ -32,10 +30,10 @@ public class Account implements UserDetails {
     private UserType userType;
 
 
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Message> receivedMessages;
 
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Message> sentMessages;
 
 

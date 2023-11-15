@@ -33,7 +33,7 @@ public class AuthService {
 
 
         String jwtToken = jwtService.generateToken(account);
-        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getEmail(), account.getUserType(), jwtToken);
+        return new AuthResponse(account.getId(),account.getFirstName(), account.getLastName(), account.getEmail(), account.getUserType(), jwtToken);
     }
 
     public AuthResponse login(LoginRequest request){
@@ -45,6 +45,6 @@ public class AuthService {
         );
         var account = accountService.findAccountByEmail(request.getEmail());
         String jwtToken = jwtService.generateToken(account);
-        return new AuthResponse(account.getFirstName(), account.getLastName(), account.getEmail(), account.getUserType(), jwtToken);
+        return new AuthResponse(account.getId(),account.getFirstName(), account.getLastName(), account.getEmail(), account.getUserType(), jwtToken);
     }
 }

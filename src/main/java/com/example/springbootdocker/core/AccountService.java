@@ -51,8 +51,9 @@ public class AccountService {
             case EMPLOYEE: employeeService.createEmployee(new EmployeeVm(accountVm));break;
             default: throw new RuntimeException("Incorrect user type : "+ userType);
         }
-//        Account account = ConverterUtil.convertFromAccountVmToAccount(accountVm);
-//        accountRepo.save(account);
+        Account acc = accountRepo.findByEmail(accountVm.getEmail());
+        accountVm.setId(acc.getId());
+        System.out.println("Kollla på denhär acount vMMMMM " + accountVm);
         return accountVm;
     }
 

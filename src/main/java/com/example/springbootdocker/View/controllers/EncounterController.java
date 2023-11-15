@@ -36,7 +36,6 @@ public class EncounterController {
     @GetMapping("/encounter")
     public ResponseEntity<List<EncounterVm>> getEncounter(){
         return  ResponseEntity.ok(encounterService.getEncounter());
-
     }
 
 

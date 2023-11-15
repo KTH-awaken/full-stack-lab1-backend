@@ -29,6 +29,4 @@ public class Observation {
      @ManyToOne
      @JoinColumn(name = "encounter_id")
      private Encounter encounter;
-
-
 }
