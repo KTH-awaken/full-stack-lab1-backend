@@ -29,11 +29,11 @@ public class AuthService {
         account.setEmail(request.getEmail());
         account.setPassword(passwordEncoder.encode(request.getPassword()));
         account.setUserType(request.getUserType());
-        accountService.createAccount(account);
+        AccountVm acc =  accountService.createAccount(account);
 
 
         String jwtToken = jwtService.generateToken(account);
-        return new AuthResponse(account.getId(),account.getFirstName(), account.getLastName(), account.getEmail(), account.getUserType(), jwtToken);
+        return new AuthResponse(acc.getId(),account.getFirstName(), account.getLastName(), account.getEmail(), account.getUserType(), jwtToken);
     }
 
     public AuthResponse login(LoginRequest request){

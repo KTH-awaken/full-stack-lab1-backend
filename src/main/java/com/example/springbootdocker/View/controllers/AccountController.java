@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class AccountController {
         if(!accountVms.isEmpty()){
             return ResponseEntity.ok(accountVms);
         }
-        throw new RuntimeException("No accounts in db");
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
     @PostMapping("/account")
@@ -62,7 +63,7 @@ public class AccountController {
         if (!messageVms.isEmpty()){
             return messageVms;
         }
-        throw new RuntimeException("no messages found");
+        return new ArrayList<>();
     }
 
     @GetMapping("/chats")
@@ -71,7 +72,7 @@ public class AccountController {
         if (!chatVms.isEmpty()){
             return chatVms;
         }
-        throw new RuntimeException("No chats found in db with user id "+ id);
+        return new ArrayList<>();
     }
 
     @PostMapping("/chat/{myId}/{participantId}")
@@ -84,7 +85,7 @@ public class AccountController {
             System.out.println("messageVms = " + messageVms);
             return messageVms;
         }
-        throw new RuntimeException("no chats with participantId : "+participantId);
+        return new ArrayList<>();
 
     }
 }
