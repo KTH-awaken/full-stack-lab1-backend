@@ -167,4 +167,16 @@ public class EncounterRepo implements IEncounterRepo {
     public List<Encounter> findByPatientId(int id) {
         return null;
     }
+
+    @Override
+    public List<Encounter> findByPatientAccountEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public List<Encounter> findByDoctorAccountEmail(String email) {
+        return null;
+    }
+
+
 }

@@ -30,8 +30,8 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()  // Allow OPTIONS requests
-                                .requestMatchers("auth/**").permitAll()
+                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers("/auth/**").permitAll()
 //                        .requestMatchers("api/v1/**").hasAnyRole(Role.DOCTOR.name(), Role.PATIENT.name(), Role.STAFF.name())
 //                        .requestMatchers("api/v1/conditions/**").hasAnyRole(Role.DOCTOR.name(), Role.PATIENT.name())
                                 .anyRequest().permitAll()

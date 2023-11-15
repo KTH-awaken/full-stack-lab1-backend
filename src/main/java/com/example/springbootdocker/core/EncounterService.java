@@ -4,16 +4,12 @@ import com.example.springbootdocker.View.ViewModels.EncounterVm;
 import com.example.springbootdocker.View.ViewModels.ObservationVm;
 import com.example.springbootdocker.View.requests.AddObservationRequest;
 import com.example.springbootdocker.View.requests.CreateEncounterRequest;
-import com.example.springbootdocker.entitys.Doctor;
-import com.example.springbootdocker.entitys.Encounter;
-import com.example.springbootdocker.entitys.Observation;
-import com.example.springbootdocker.entitys.Patient;
+import com.example.springbootdocker.entitys.*;
 import com.example.springbootdocker.mapper.EncounterMapper;
-import com.example.springbootdocker.repos.IDoctorRepo;
-import com.example.springbootdocker.repos.IEncounterRepo;
-import com.example.springbootdocker.repos.IObservationRepo;
-import com.example.springbootdocker.repos.IPatientRepo;
+import com.example.springbootdocker.repos.*;
+import com.example.springbootdocker.repos.impl.AccountRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EncounterService {
     private final IEncounterRepo encounterRepo;
+    private final IAccountRepo accountRepo;
     private final IObservationRepo observationRepo;
     private final IDoctorRepo doctorRepo;
     private final IPatientRepo patientRepo;
@@ -31,7 +28,16 @@ public class EncounterService {
 
 
     public List<EncounterVm> getEncounter(){
-        List<Encounter> encounters = encounterRepo.findAll();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(username);
+        Account account = accountRepo.findByEmail(username);
+        if (account == null) return new ArrayList<>();
+        List<Encounter> encounters;
+        switch (account.getUserType()){
+            case PATIENT -> encounters = encounterRepo.findByPatientAccountEmail(username);
+            case DOCTOR -> encounters = encounterRepo.findByDoctorAccountEmail(username);
+            default -> encounters = new ArrayList<>();
+        }
         return mapper.toEncounterVMs(encounters);
     }
 
