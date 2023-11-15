@@ -77,6 +77,8 @@ public class AccountController {
     @PostMapping("/chat/{myId}/{participantId}")
     public List<MessageVm> getChatByParticipantId(@PathVariable Integer myId, @PathVariable Integer participantId){
         System.out.println("in getChatby paricipanid");
+        System.out.println("myId = " + myId);
+        System.out.println("participantId = " + participantId);
         List<MessageVm> messageVms = accountService.getChatByParticipantId(myId,participantId);
         if(!messageVms.isEmpty()){
             System.out.println("messageVms = " + messageVms);

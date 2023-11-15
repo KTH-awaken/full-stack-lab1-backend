@@ -12,6 +12,10 @@ public class MessageVm {
     private Date date;
     private int senderId;
     private int receiverId;
+    private String senderFirstName;
+    private String senderLastName;
+    private String receiverFirstName;
+    private String receiverLastName;
 
     public MessageVm(int id,String text, Date date, int senderId, int receiverId) {
         this.id = id;
@@ -71,6 +75,54 @@ public class MessageVm {
         this.receiverId = receiverId;
     }
 
+    public int getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
+    }
+
+    public int getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(int receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public String getSenderFirstName() {
+        return senderFirstName;
+    }
+
+    public void setSenderFirstName(String senderFirstName) {
+        this.senderFirstName = senderFirstName;
+    }
+
+    public String getSenderLastName() {
+        return senderLastName;
+    }
+
+    public void setSenderLastName(String senderLastName) {
+        this.senderLastName = senderLastName;
+    }
+
+    public String getReceiverFirstName() {
+        return receiverFirstName;
+    }
+
+    public void setReceiverFirstName(String receiverFirstName) {
+        this.receiverFirstName = receiverFirstName;
+    }
+
+    public String getReceiverLastName() {
+        return receiverLastName;
+    }
+
+    public void setReceiverLastName(String receiverLastName) {
+        this.receiverLastName = receiverLastName;
+    }
+
     @Override
     public String toString() {
         return "MessageVm{" +
@@ -79,6 +131,10 @@ public class MessageVm {
                 ", date=" + date +
                 ", senderId=" + senderId +
                 ", receiverId=" + receiverId +
+                ", senderFirstName='" + senderFirstName + '\'' +
+                ", senderLastName='" + senderLastName + '\'' +
+                ", receiverFirstName='" + receiverFirstName + '\'' +
+                ", receiverLastName='" + receiverLastName + '\'' +
                 '}';
     }
 }

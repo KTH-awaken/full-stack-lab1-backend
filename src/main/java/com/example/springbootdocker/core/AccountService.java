@@ -89,7 +89,8 @@ public List<ChatVm> getChats(Integer id) {
         int otherParticipantId = (message.getSender() == id) ? message.getReceiver() : message.getSender();
 
         if (!participantNames.containsKey(otherParticipantId)) {
-            String otherParticipantName = getParticipantName(otherParticipantId);
+            String otherParticipantName = getFirstName(otherParticipantId,"Unknown");
+            otherParticipantName.concat(" "+getLastName(otherParticipantId,"unknown"));
             participantNames.put(otherParticipantId, otherParticipantName);
         }
 
@@ -111,17 +112,35 @@ public List<ChatVm> getChats(Integer id) {
 
     return chatVms;
 }
-    private String getParticipantName(Integer participantId) {
-//        Account participant = accountRepo.getReferenceById(participantId);
-//        return participant.map(account -> account.getFirstName() + " " + account.getLastName()).orElse("Unknown");
-        return "";
+
+public List<MessageVm> getChatByParticipantId(Integer myAccountId, Integer participantId) {
+    List<Message> messages = messageRepo.findMessagesBetweenTwoPeople(myAccountId, participantId);
+    List<MessageVm> messageVms = ConverterUtil.convertFromMessageToMessageVmList(messages);
+
+    Optional<Account> participant = accountRepo.findById(participantId);
+    String participantFirstName = participant.map(Account::getFirstName).orElse("Unknown");
+    String participantLastName = participant.map(Account::getLastName).orElse("Unknown");
+
+    for (MessageVm messageVm : messageVms) {
+        messageVm.setSenderFirstName(getFirstName(messageVm.getSenderId(), participantFirstName));
+        messageVm.setSenderLastName(getLastName(messageVm.getSenderId(), participantLastName));
+        messageVm.setReceiverFirstName(getFirstName(messageVm.getReceiverId(), participantFirstName));
+        messageVm.setReceiverLastName(getLastName(messageVm.getReceiverId(), participantLastName));
     }
 
-    public List<MessageVm> getChatByParticipantId(Integer myAccountId,Integer participantId) {
-        List<Message> messages = messageRepo.findMessagesBetweenTwoPeople(myAccountId, participantId);
-        List<MessageVm> messageVms = ConverterUtil.convertFromMessageToMessageVmList(messages);
-        System.out.println("messageVms = " + messageVms);
-        Collections.reverse(messageVms);
-        return messageVms;
+    return messageVms;
+}
+
+    private String getFirstName(Integer accountId, String defaultName) {
+        Optional<Account> account = accountRepo.findById(accountId);
+        return account.map(Account::getFirstName).orElse(defaultName);
     }
+
+    private String getLastName(Integer accountId, String defaultName) {
+        Optional<Account> account = accountRepo.findById(accountId);
+        return account.map(Account::getLastName).orElse(defaultName);
+    }
+
+
+
 }
