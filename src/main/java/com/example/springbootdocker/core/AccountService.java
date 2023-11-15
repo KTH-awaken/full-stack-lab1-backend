@@ -118,8 +118,7 @@ public List<ChatVm> getChats(Integer id) {
     }
 
     public List<MessageVm> getChatByParticipantId(Integer myAccountId,Integer participantId) {
-        List<Message> messages = messageRepo.findBySenderAndReceiverOrderByDateDesc(myAccountId, participantId);
-        System.out.println("messages = " + messages);
+        List<Message> messages = messageRepo.findMessagesBetweenTwoPeople(myAccountId, participantId);
         List<MessageVm> messageVms = ConverterUtil.convertFromMessageToMessageVmList(messages);
         System.out.println("messageVms = " + messageVms);
         Collections.reverse(messageVms);

@@ -3,6 +3,7 @@ package com.example.springbootdocker.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,6 +24,7 @@ public class AuthController {
         return ResponseEntity.ok(res);
     }
 
+    @PreAuthorize("hasRole('ROLE_PATIENT')")
     @GetMapping("/patient-test")
     public String patientSecure(){
         return "Hello from secure endpoint for patient";
@@ -30,12 +32,13 @@ public class AuthController {
 
 
 
-
+    @PreAuthorize("hasRole('ROLE_DOCTOR')")
     @GetMapping("/doctor-test")
     public String doctorSecure(){
         return "Hello from secure endpoint for doctor";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_PATIENT','ROLE_DOCTOR')")
     @GetMapping("/doctor-patient-test")
     public String doctorPatientSecure(){
         return "Hello from secure endpoint for doctor and patient";

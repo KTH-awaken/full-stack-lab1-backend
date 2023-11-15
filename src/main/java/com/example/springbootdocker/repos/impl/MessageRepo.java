@@ -169,8 +169,13 @@ public class MessageRepo implements IMessageRepo {
     }
 
     @Override
-    public List<Message> findBySenderAndReceiverOrderByDateDesc(Integer myAccountId, Integer participantId) {
+    public List<Message> findMessagesBetweenTwoPeople(int myAccountId, int participantId) {
         return null;
     }
+
+//    @Override
+//    public List<Message> findBySenderAndReceiverOrderByDateDesc(Integer myAccountId, Integer participantId) {
+//        return null;
+//    }
 
 }
